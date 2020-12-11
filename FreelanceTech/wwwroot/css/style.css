@@ -307,7 +307,9 @@ input {
       display: none; }
     .actions ul li {
       float: right; }
-      .actions ul li:first-child {
+      .actions ul li:
+      
+      -child {
         float: left; }
         .actions ul li:first-child a {
           background: #e8e8e8;

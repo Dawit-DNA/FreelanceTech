@@ -40,8 +40,9 @@ namespace FreelanceTech.Migrations
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
-                    First_Name = table.Column<string>(nullable: true),
-                    Last_Name = table.Column<string>(nullable: true)
+                    firstName = table.Column<string>(nullable: true),
+                    lastName = table.Column<string>(nullable: true),
+                    type = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

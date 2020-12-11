@@ -54,7 +54,7 @@ namespace FreelanceTech.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,First_Name,Last_Name,Email,Phone_Number,Expertise_Level,Education,Experience,Language,Hourly_Rate,Title,Professional_Overview,Photo,Address,Government_ID,Rate,Qualification_Status")] FreelancerUser freelancerUser)
+        public async Task<IActionResult> Create([Bind("id,First_Name,Last_Name,Email,Phone_Number,Expertise_Level,Education,Experience,Language,Hourly_Rate,Title,Professional_Overview,Photo,Address,Government_ID,Rate,Qualification_Status")] Models.Freelancer freelancerUser)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace FreelanceTech.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,First_Name,Last_Name,Email,Phone_Number,Expertise_Level,Education,Experience,Language,Hourly_Rate,Title,Professional_Overview,Photo,Address,Government_ID,Rate,Qualification_Status")] FreelancerUser freelancerUser)
+        public async Task<IActionResult> Edit(int id, [Bind("id,First_Name,Last_Name,Email,Phone_Number,Expertise_Level,Education,Experience,Language,Hourly_Rate,Title,Professional_Overview,Photo,Address,Government_ID,Rate,Qualification_Status")] Models.Freelancer freelancerUser)
         {
             if (id != freelancerUser.id)
             {

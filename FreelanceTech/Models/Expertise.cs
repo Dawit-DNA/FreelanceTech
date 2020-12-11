@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
+
 
 namespace FreelanceTech.Models
 {
+    
     public class Expertise
     {
-        List<Category> categories = new List<Category>();
+        public int id { get; set; }
+        public string freelancerId { get; set; }
+        public string category { get; set; }
+        public string skill  { get; set; }
     }
 }

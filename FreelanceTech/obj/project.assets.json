@@ -9164,34 +9164,39 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Adonias\\.nuget\\packages\\": {},
+    "C:\\Users\\Awhole\\.nuget\\packages\\": {},
+    "C:\\Microsoft\\Xamarin\\NuGet\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\FreelanceTech\\FreelanceTech\\FreelanceTech.csproj",
+      "projectUniqueName": "C:\\Users\\Awhole\\source\\repos\\Dawit-DNA\\FreelanceTech\\FreelanceTech\\FreelanceTech.csproj",
       "projectName": "FreelanceTech",
-      "projectPath": "E:\\FreelanceTech\\FreelanceTech\\FreelanceTech.csproj",
-      "packagesPath": "C:\\Users\\Adonias\\.nuget\\packages\\",
-      "outputPath": "E:\\FreelanceTech\\FreelanceTech\\obj\\",
+      "projectPath": "C:\\Users\\Awhole\\source\\repos\\Dawit-DNA\\FreelanceTech\\FreelanceTech\\FreelanceTech.csproj",
+      "packagesPath": "C:\\Users\\Awhole\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Awhole\\source\\repos\\Dawit-DNA\\FreelanceTech\\FreelanceTech\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
+        "C:\\Microsoft\\Xamarin\\NuGet\\",
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Adonias\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\Awhole\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "https://api.nuget.org/v3/index.json": {}
+        "https://api.nuget.org/v3/index.json": {},
+        "https://nuget.telerik.com/nuget": {}
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "projectReferences": {}
         }
       },
@@ -9203,6 +9208,7 @@
     },
     "frameworks": {
       "netcoreapp3.1": {
+        "targetAlias": "netcoreapp3.1",
         "dependencies": {
           "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
             "target": "Package",
@@ -9255,7 +9261,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }

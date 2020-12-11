@@ -1,16 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
-namespace Freelancer.Models
+namespace FreelanceTech.Models
 {
     public class Customer
 {
-        public int id { get; set; }
-        public string First_Name { get; set; }
-        public string Last_Name { get; set; }
-        public string Email { get; set; }
-        public int Phone_Number { get; set; }
+        [Key]
+        public string customerId { get; set; }
+        public byte[] photo { get; set; }
+        public byte[] legalId { get; set; }
+        public string status { get; set; }
+        public int language { get; set; }
+        public int phoneNumber { get; set; }
+        public Address address { get; set; }
+        public Language Language { get; set; }
+        public Wallet Wallet { get; set; }
+        public List<Transaction> Transaction { get; set; }
+        public List<Job> Job { get; set; }
+        public string englishProficiency { get; set; }
     }
 }

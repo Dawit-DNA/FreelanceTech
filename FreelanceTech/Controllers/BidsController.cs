@@ -54,7 +54,7 @@ namespace FreelanceTech.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,Job_id,Last_Name,Email,Phone_Number")] Bid bid)
+        public async Task<IActionResult> Create([Bind("id,Job_id,Last_Name,Email,Phone_Number")] Proposal bid)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace FreelanceTech.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,Job_id,Last_Name,Email,Phone_Number")] Bid bid)
+        public async Task<IActionResult> Edit(int id, [Bind("id,Job_id,Last_Name,Email,Phone_Number")] Proposal bid)
         {
             if (id != bid.id)
             {

@@ -5,8 +5,6 @@ using FreelanceTech.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Freelancer.Models;
-using FreelancerTech.Models;
 
 namespace FreelanceTech.Data
 {
@@ -16,12 +14,19 @@ namespace FreelanceTech.Data
             : base(options)
         {
         }
-        public DbSet<FreelanceTech.Models.FreelancerUser> FreelancerUser { get; set; }
-        public DbSet<Freelancer.Models.Customer> Customer { get; set; }
-        public DbSet<FreelancerTech.Models.Adminstrator> Adminstrator { get; set; }
-        public DbSet<FreelanceTech.Models.Job> Job { get; set; }
-        public DbSet<FreelanceTech.Models.Category> Category { get; set; }
-        public DbSet<FreelanceTech.Models.Bid> Bid { get; set; }
+        public DbSet<Freelancer> Freelancer { get; set; }
+        public DbSet<Customer> Customer { get; set; }
+        public DbSet<Job> Job { get; set; }
+        public DbSet<Expertise> Category { get; set; }
+        public DbSet<Proposal> Proposal { get; set; }
+        public DbSet<Address> Address { get; set; }
+        public DbSet<Chat> Chat { get; set; }
+        public DbSet<Contract> Contract { get; set; }
+        public DbSet<Experience> Experience { get; set; }
+        public DbSet<Expertise> Expertise { get; set; }
+        public DbSet<Language> Language { get; set; }
+        public DbSet<Transaction> Transaction { get; set; }
+        public DbSet<Wallet> Wallet { get; set; }
 
     }
 }

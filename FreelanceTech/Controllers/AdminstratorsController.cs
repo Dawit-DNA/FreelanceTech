@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FreelanceTech.Data;
-using FreelancerTech.Models;
+using FreelanceTech.Models;
 
 namespace FreelanceTech.Controllers
 {

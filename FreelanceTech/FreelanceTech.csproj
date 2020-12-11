@@ -6,6 +6,46 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\Adminstrators\**" />
+    <Compile Remove="Views\Bids\**" />
+    <Compile Remove="Views\Categories\**" />
+    <Compile Remove="Views\Customers\**" />
+    <Compile Remove="Views\FreelancerUsers\**" />
+    <Compile Remove="Views\Jobs\**" />
+    <Content Remove="Views\Adminstrators\**" />
+    <Content Remove="Views\Bids\**" />
+    <Content Remove="Views\Categories\**" />
+    <Content Remove="Views\Customers\**" />
+    <Content Remove="Views\FreelancerUsers\**" />
+    <Content Remove="Views\Jobs\**" />
+    <EmbeddedResource Remove="Views\Adminstrators\**" />
+    <EmbeddedResource Remove="Views\Bids\**" />
+    <EmbeddedResource Remove="Views\Categories\**" />
+    <EmbeddedResource Remove="Views\Customers\**" />
+    <EmbeddedResource Remove="Views\FreelancerUsers\**" />
+    <EmbeddedResource Remove="Views\Jobs\**" />
+    <None Remove="Views\Adminstrators\**" />
+    <None Remove="Views\Bids\**" />
+    <None Remove="Views\Categories\**" />
+    <None Remove="Views\Customers\**" />
+    <None Remove="Views\FreelancerUsers\**" />
+    <None Remove="Views\Jobs\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\AdminstratorsController.cs" />
+    <Compile Remove="Controllers\BidsController.cs" />
+    <Compile Remove="Controllers\CategoriesController.cs" />
+    <Compile Remove="Controllers\CustomersController.cs" />
+    <Compile Remove="Controllers\FreelancerUsersController.cs" />
+    <Compile Remove="Controllers\JobsController.cs" />
+    <Compile Remove="Models\Adminstrator.cs" />
+    <Compile Remove="Models\BussinessAnalyst.cs" />
+    <Compile Remove="Models\ProjectManager.cs" />
+    <Compile Remove="Models\QualityController.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.9" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.9" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.9" />

@@ -8,7 +8,9 @@ namespace FreelanceTech.Models
 {
     public class User : IdentityUser
     {
-        public string First_Name { get; set; }
-        public string Last_Name { get; set; }
+        public string firstName { get; set; }
+        public string lastName { get; set; }
+        public string type { get; set; }
+
     }
 }
