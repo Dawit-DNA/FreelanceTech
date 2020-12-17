@@ -46,6 +46,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="3.1.9" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.9" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.9" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.9" />
@@ -54,6 +55,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.9" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
     <PackageReference Include="SendGrid" Version="9.21.1" />
+    <PackageReference Include="WestWind.AspnetCore.LiveReload" Version="0.3.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -61,6 +63,15 @@
     <Folder Include="Areas\Customer\Data\" />
     <Folder Include="Areas\Customer\Models\" />
     <Folder Include="Areas\Customer\Views\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\startbootstrap-agency-gh-pages\assets\img\close-icon.svg" />
+    <None Include="wwwroot\startbootstrap-agency-gh-pages\assets\img\navbar-logo.svg" />
+    <None Include="wwwroot\startbootstrap-agency-gh-pages\assets\mail\contact_me.js" />
+    <None Include="wwwroot\startbootstrap-agency-gh-pages\assets\mail\contact_me.php" />
+    <None Include="wwwroot\startbootstrap-agency-gh-pages\assets\mail\jqBootstrapValidation.js" />
+    <None Include="wwwroot\startbootstrap-agency-gh-pages\js\scripts.js" />
   </ItemGroup>
 
 </Project>

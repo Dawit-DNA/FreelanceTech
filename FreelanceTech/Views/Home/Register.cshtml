@@ -1,299 +1,250 @@
 ﻿@{
-    ViewData["Title"] = "Register Page";
+    Layout = null;
 }
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="colorlib.com">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Sign Up Form</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Font Icon -->
-    <link rel="stylesheet" href="../fonts/material-icon/css/material-design-iconic-font.min.css">
-    <link rel="stylesheet" href="../vendor/nouislider/nouislider.min.css">
+    <title>Gentelella Alela! | </title>
 
-    <!-- Main css -->
-    <link rel="stylesheet" href="../css/style.css">
+    <!-- Bootstrap -->
+    <link href="~/gentelella-master/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="~/gentelella-master/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="~/gentelella-master/vendors/nprogress/nprogress.css" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link href="~/gentelella-master/build/css/custom.min.css" rel="stylesheet">
 </head>
 
-<body>
+<body class="nav-md">
+    <div class="container body">
 
-    <div class="main">
 
-        <div class="container">
-            <form method="POST" id="signup-form" class="signup-form" action="#">
-                <div>
-                    <h3>Personal info</h3>
-                    <fieldset>
-                        <h2>Personal information</h2>
-                        <p class="desc">Please enter your infomation and proceed to next step so we can build your account</p>
-                        <div class="fieldset-content">
-                            <div class="form-row">
-                                <label class="form-label">Name</label>
-                                <div class="form-flex">
-                                    <div class="form-group">
-                                        <input type="text" name="first_name" id="first_name" />
-                                        <span class="text-input">First</span>
+        <!-- page content -->
+        <div class="right_col" role="main">
+            <div class="">
+                <div class="page-title">
+                    <div class="title_left">
+                        <h3>Account Setup</h3>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <div class="row">
+
+                        <div class="col-md-12 col-sm-12 ">
+                            <div class="x_panel">
+
+                                <div class="x_content">
+
+
+                                    <!-- Smart Wizard -->
+                                    <p>Fill out these basic Information to setup your account.</p>
+                                    <div id="wizard" class="form_wizard wizard_horizontal">
+                                        <ul class="wizard_steps">
+                                            <li>
+                                                <a href="#step-1">
+                                                    <span class="step_no">1</span>
+                                                    <span class="step_descr">
+                                                        Step 1<br />
+                                                        <medium>What do you do?</medium>
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#step-2">
+                                                    <span class="step_no">2</span>
+                                                    <span class="step_descr">
+                                                        Step 2<br />
+                                                        <medium>Skill Level</medium>
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#step-3">
+                                                    <span class="step_no">3</span>
+                                                    <span class="step_descr">
+                                                        Step 3<br />
+                                                              <Medium>Education</Medium>
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#step-4">
+                                                    <span class="step_no">4</span>
+                                                    <span class="step_descr">
+                                                        Step 4<br />
+                                                        <medium>Experience</medium>
+                                                    </span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        <div id="step-1">
+                                            <form class="form-horizontal form-label-left">
+                                                <div class="form-group row">
+                                                    <label class="col-form-label col-md-3 col-sm-3 label-align">
+                                                        Choose Category <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 ">
+                                                        <select class="form-control">
+                                                            <option>Choose Category</option>
+                                                            <option>Option one</option>
+                                                            <option>Option two</option>
+                                                            <option>Option three</option>
+                                                            <option>Option four</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <label class="col-form-label col-md-3 col-sm-3 label-align">
+                                                        Choose Skill <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 ">
+                                                        <select class="form-control">
+                                                            <option>Choose Skill</option>
+                                                            <option>Option one</option>
+                                                            <option>Option two</option>
+                                                            <option>Option three</option>
+                                                            <option>Option four</option>
+                                                        </select>
+                                                    </div>
+
+                                                </div>
+                                                @*
+                                                    <div class="form-group row">
+                                                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">
+                                                            First Name <span class="required">*</span>
+                                                        </label>
+                                                        <div class="col-md-6 col-sm-6 ">
+                                                            <input type="text" id="first-name" required="required" class="form-control  ">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">
+                                                            Last Name <span class="required">*</span>
+                                                        </label>
+                                                        <div class="col-md-6 col-sm-6 ">
+                                                            <input type="text" id="last-name" name="last-name" required="required" class="form-control ">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">Middle Name / Initial</label>
+                                                        <div class="col-md-6 col-sm-6 ">
+                                                            <input id="middle-name" class="form-control col" type="text" name="middle-name">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-form-label col-md-3 col-sm-3 label-align">Gender</label>
+                                                        <div class="col-md-6 col-sm-6 ">
+                                                            <div id="gender" class="btn-group" data-toggle="buttons">
+                                                                <label class="btn btn-secondary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-secondary">
+                                                                    <input type="radio" name="gender" value="male" class="join-btn"> &nbsp; Male &nbsp;
+                                                                </label>
+                                                                <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-secondary">
+                                                                    <input type="radio" name="gender" value="female" class="join-btn"> Female
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-form-label col-md-3 col-sm-3 label-align">
+                                                            Date Of Birth <span class="required">*</span>
+                                                        </label>
+                                                        <div class="col-md-6 col-sm-6 ">
+                                                            <input id="birthday" class="date-picker form-control" required="required" type="text">
+                                                        </div>
+                                                    </div>*@
+
+                                            </form>
+
+                                        </div>
+                                        <div id="step-2">
+
+                                            <form class="form-horizontal form-label-left">
+                                                <div class="form-group row">
+
+                                                    <label class="col-form-label col-md-3 col-sm-3 label-align">
+                                                        What is your Skill Level? <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 ">
+                                                        <div class="row">
+                                                            <div class="btn-group form-check" data-toggle="buttons">
+                                                                <div class="row">
+                                                                    <div class="btn-group form-check" data-toggle="buttons">
+                                                                        <label class="btn btn-secondary button-choice active">
+                                                                            <input type="radio" class="join-btn" name="options" id="option1"> Begginer
+                                                                        </label>
+                                                                        <label class="btn btn-secondary button-choice">
+                                                                            <input type="radio" name="options" class="join-btn" id="option2"> Intermediate
+                                                                        </label>
+                                                                        <label class="btn btn-secondary button-choice" >
+                                                                            <input type="radio" name="options" class="join-btn" id="option3"> Expert
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div id="step-3">
+                                            <h2 class="StepTitle">Educational Background</h2>
+                                            <div class="col-md-9 col-sm-9 ">
+                                                <textarea class="resizable_textarea form-control" placeholder="Describe your Educational Background in detail"></textarea>
+                                                <a href="#step-4">Skip this step</a>
+                                            </div>
+                                        </div>
+                                        <div id="step-4">
+                                            <h2 class="StepTitle">Experience</h2>
+                                          
+                                        </div>
+
                                     </div>
-                                    <div class="form-group">
-                                        <input type="text" name="last_name" id="last_name" />
-                                        <span class="text-input">Last</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="phone" class="form-label">Phone</label>
-                                <input type="text" name="phone" id="phone" />
-                            </div>
-
-                    </fieldset>
-
-                    <h3>Skill</h3>
-                    <fieldset>
-                        <h2>What do you need?</h2>
-
-                        <div class="fieldset-content">
-                            <div class="form-row">
-                                <label class="form-label">Choose Category</label>
-                                <div class="dropdown">
-                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Category
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="#">Web Development</a>
-                                        <a class="dropdown-item" href="#">Database Design</a>
-                                        <a class="dropdown-item" href="#">Graphics Deisgn</a>
-                                    </div>
-                                </div>
-                                <label class="form-label">Choose Skill Set</label>
-                                <div class="dropdown">
-                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Skill
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="#">C#</a>
-                                        <a class="dropdown-item" href="#">Angular</a>
-                                        <a class="dropdown-item" href="#">Front End</a>
-                                        <a class="dropdown-item" href="#">Adobe Photoshop</a>
-                                        <a class="dropdown-item" href="#">Node JS</a>
-
-                                    </div>
-                                </div>
-                            </div>
+                                    <!-- End SmartWizard Content -->
 
 
-                        </div>
-
-                    </fieldset>
-                    <h3>Add Employment History</h3>
-                    <fieldset>
-                        <h2>Add Employment History</h2>
-                        <p class="desc">Please enter your infomation and proceed to next step so we can build your account</p>
-                        <div class="fieldset-content">
-                            <div class="form-row">
-                                <label class="form-label">Employment History</label>
-
-                                <textarea name="paragraph_text" cols="130" rows="27"></textarea>
-                            </div>
 
 
-                        </div>
-                    </fieldset>
 
 
-                    <h3>Language</h3>
-                    <fieldset>
-                        <h2>Language</h2>
-
-                        <div class="fieldset-content">
-                            <div class="form-row">
-                                <label class="form-label">What is your language proficiency?</label>
-                                <div class="dropdown">
-                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        English
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="#">Arabic</a>
-                                        <a class="dropdown-item" href="#">English</a>
-                                        <a class="dropdown-item" href="#">French</a>
-                                        <a class="dropdown-item" href="#">Russian</a>
-                                    </div>
-                                </div>
-                                <label class="form-label">What other languages do you speak</label>
-                                <div class="dropdown">
-                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        None
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="#">French</a>
-                                        <a class="dropdown-item" href="#">German</a>
-                                        <a class="dropdown-item" href="#">Spanish</a>
-                                        <a class="dropdown-item" href="#">Chinese</a>
-                                        <a class="dropdown-item" href="#">Japanese</a>
-
-                                    </div>
-                                </div>
-
-
-                            </div>
-
-
-                        </div>
-
-                    </fieldset>
-                    <h3>Job Requirements</h3>
-                    <fieldset>
-                        <h2>Job Requirements</h2>
-
-                        <div class="fieldset-content">
-                            <div class="form-row">
-                                <label class="form-label">Details of Job Requirements</label>
-                                <div>
-                                    <textarea name="paragraph_text" cols="130" rows="27"></textarea>
-                                    <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
-                                        Highlight your expectations and requirements. This will appear in your profile for freelancers..
-                                    </button>
-                                </div>
-                            </div>
-
-
-                        </div>
-                    </fieldset>
-                    <h3>Profile Photo</h3>
-                    <fieldset>
-                        <h2>Profile Photo</h2>
-
-                        <div class="fieldset-content">
-                            <div class="form-row">
-                                <label class="form-label">Please upload a professional portrait that clearly shows your face</label>
-                                <div class="file-upload-wrapper">
-                                    <input type="file" id="input-file-now-custom-2" class="file-upload"
-                                           data-height="500" />
-                                </div>
-                            </div>
-
-
-                        </div>
-                    </fieldset>
-                    <h3>Phone Number</h3>
-                    <fieldset>
-                        <h2>Phone Number</h2>
-                        <p class="desc">Add your phone number and Location(Optional)</p>
-                        <div class="fieldset-content">
-                            <div class="form-row">
-
-                                <div class="form-group">
-                                    <label for="phone" class="form-label">Eth +251</label>
-                                    <input type="number" name="phone" id="phone" />
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" name="first_name" id="first_name" />
-                            <span class="text-input">Location</span>
-                        </div>
-
-
-                    </fieldset>
-
-                    <h3>Connect Bank Account</h3>
-                    <fieldset>
-                        <h2>Connect Bank Account</h2>
-                        <p class="desc">Please enter your infomation and proceed to next step so we can build your account</p>
-                        <div class="fieldset-content">
-                            <div class="form-group">
-                                <label for="find_bank" class="form-label">Find Your Bank</label>
-                                <div class="form-find">
-                                    <input type="text" name="find_bank" id="find_bank" placeholder="Ex. Techcombank" />
-                                    <input type="submit" value="Search" class="submit">
-                                    <span class="form-icon"><i class="zmdi zmdi-search"></i></span>
-                                </div>
-                            </div>
-                            <div class="choose-bank">
-                                <p class="choose-bank-desc">Or choose from these popular bank</p>
-                                <div class="form-radio-flex">
-                                    <div class="form-radio-item">
-                                        <input type="radio" name="choose_bank" id="bank_1" value="bank_1" checked="checked" />
-                                        <label for="bank_1"><img src="images/bank-1.jpg" alt=""></label>
-                                    </div>
-
-                                    <div class="form-radio-item">
-                                        <input type="radio" name="choose_bank" id="bank_2" value="bank_2" />
-                                        <label for="bank_2"><img src="images/bank-2.jpg" alt=""></label>
-                                    </div>
-
-                                    <div class="form-radio-item">
-                                        <input type="radio" name="choose_bank" id="bank_3" value="bank_3" />
-                                        <label for="bank_3"><img src="images/bank-3.jpg" alt=""></label>
-                                    </div>
-
-                                    <div class="form-radio-item">
-                                        <input type="radio" name="choose_bank" id="bank_4" value="bank_4" />
-                                        <label for="bank_4"><img src="images/bank-4.jpg" alt=""></label>
-                                    </div>
-
-                                    <div class="form-radio-item">
-                                        <input type="radio" name="choose_bank" id="bank_5" value="bank_5" />
-                                        <label for="bank_5"><img src="images/bank-5.jpg" alt=""></label>
-                                    </div>
-
-                                    <div class="form-radio-item">
-                                        <input type="radio" name="choose_bank" id="bank_6" value="bank_6" />
-                                        <label for="bank_6"><img src="images/bank-6.jpg" alt=""></label>
-                                    </div>
-
-                                    <div class="form-radio-item">
-                                        <input type="radio" name="choose_bank" id="bank_7" value="bank_7" />
-                                        <label for="bank_7"><img src="images/bank-7.jpg" alt=""></label>
-                                    </div>
-
-                                    <div class="form-radio-item">
-                                        <input type="radio" name="choose_bank" id="bank_8" value="bank_8" />
-                                        <label for="bank_8"><img src="images/bank-8.jpg" alt=""></label>
-                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </fieldset>
-
-                    <h3>Set Financial Goals</h3>
-                    <fieldset>
-                        <h2>Set Financial Goals</h2>
-                        <p class="desc">Set up your money limit to reach the future plan</p>
-                        <div class="fieldset-content">
-                            <div class="donate-us">
-                                <div class="price_slider ui-slider ui-slider-horizontal">
-                                    <div id="slider-margin"></div>
-                                    <p class="your-money">
-                                        Your money you can spend per month :
-                                        <span class="money" id="value-lower"></span>
-                                        <span class="money" id="value-upper"></span>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </fieldset>
+                    </div>
                 </div>
-            </form>
-        </div>
+            </div>
+            <!-- /page content -->
+            <!-- footer content -->
+            <footer>
 
+                <div class="clearfix"></div>
+            </footer>
+            <!-- /footer content -->
+        </div>
     </div>
 
-    <!-- JS -->
-    <script src="../vendor/jquery/jquery.min.js"></script>
-    <script src="../vendor/jquery-validation/dist/jquery.validate.min.js"></script>
-    <script src="../vendor/jquery-validation/dist/additional-methods.min.js"></script>
-    <script src="../vendor/jquery-steps/jquery.steps.min.js"></script>
-    <script src="../vendor/minimalist-picker/dobpicker.js"></script>
-    <script src="../vendor/nouislider/nouislider.min.js"></script>
-    <script src="../vendor/wnumb/wNumb.js"></script>
-    <script src="../js/main.js"></script>
-</body>
+    <!-- jQuery -->
+    <script src="~/gentelella-master/vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="~/gentelella-master/vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- FastClick -->
+    <script src="~/gentelella-master/vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="~/gentelella-master/vendors/nprogress/nprogress.js"></script>
+    <!-- jQuery Smart Wizard -->
+    <script src="~/gentelella-master/vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js"></script>
+    <!-- Custom Theme Scripts -->
+    <script src="~/gentelella-master/build/js/custom.min.js"></script>
 
+
+</body>
 </html>

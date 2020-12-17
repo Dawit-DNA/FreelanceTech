@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using FreelanceTech.Models;
+using Shared.Web.MvcExtensions;
+
 
 namespace FreelanceTech.Controllers
 {
@@ -23,7 +25,10 @@ namespace FreelanceTech.Controllers
             return View();
 
         }
-
+        public IActionResult account()
+        {
+            return Content(this.User.GetUserId());
+        }
         public IActionResult Privacy()
         {
             return View();

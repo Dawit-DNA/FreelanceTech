@@ -14,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using FreelanceTech.Models;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using Westwind.AspNetCore.LiveReload;
 
 namespace FreelanceTech
 {
@@ -39,7 +40,9 @@ namespace FreelanceTech
             services.Configure<AuthMessageSenderOptions>(Configuration);
 
             services.AddRazorPages();
+       
         }
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

@@ -893,3 +893,7 @@ C:\Users\Awhole\source\repos\Dawit-DNA\FreelanceTech\FreelanceTech\obj\Debug\net
 C:\Users\Awhole\source\repos\Dawit-DNA\FreelanceTech\FreelanceTech\obj\Debug\netcoreapp3.1\FreelanceTech.dll
 C:\Users\Awhole\source\repos\Dawit-DNA\FreelanceTech\FreelanceTech\obj\Debug\netcoreapp3.1\FreelanceTech.pdb
 C:\Users\Awhole\source\repos\Dawit-DNA\FreelanceTech\FreelanceTech\obj\Debug\netcoreapp3.1\FreelanceTech.genruntimeconfig.cache
+C:\Users\Awhole\source\repos\Dawit-DNA\FreelanceTech\FreelanceTech\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout1.cshtml.g.cs
+C:\Users\Awhole\source\repos\Dawit-DNA\FreelanceTech\FreelanceTech\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_signIn(Layout).cshtml.g.cs
+C:\Users\Awhole\source\repos\Dawit-DNA\FreelanceTech\FreelanceTech\bin\Debug\netcoreapp3.1\Westwind.AspNetCore.LiveReload.dll
+C:\Users\Awhole\source\repos\Dawit-DNA\FreelanceTech\FreelanceTech\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.Google.dll
