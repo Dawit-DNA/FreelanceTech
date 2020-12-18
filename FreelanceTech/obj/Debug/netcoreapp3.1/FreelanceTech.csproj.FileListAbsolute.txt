@@ -897,3 +897,14 @@ C:\Users\Awhole\source\repos\Dawit-DNA\FreelanceTech\FreelanceTech\obj\Debug\net
 C:\Users\Awhole\source\repos\Dawit-DNA\FreelanceTech\FreelanceTech\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_signIn(Layout).cshtml.g.cs
 C:\Users\Awhole\source\repos\Dawit-DNA\FreelanceTech\FreelanceTech\bin\Debug\netcoreapp3.1\Westwind.AspNetCore.LiveReload.dll
 C:\Users\Awhole\source\repos\Dawit-DNA\FreelanceTech\FreelanceTech\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.Google.dll
+C:\Users\Awhole\source\repos\Dawit-DNA\FreelanceTech\FreelanceTech\obj\Debug\netcoreapp3.1\Razor\Views\Freelancers\Create.cshtml.g.cs
+C:\Users\Awhole\source\repos\Dawit-DNA\FreelanceTech\FreelanceTech\obj\Debug\netcoreapp3.1\Razor\Views\Freelancers\Delete.cshtml.g.cs
+C:\Users\Awhole\source\repos\Dawit-DNA\FreelanceTech\FreelanceTech\obj\Debug\netcoreapp3.1\Razor\Views\Freelancers\Details.cshtml.g.cs
+C:\Users\Awhole\source\repos\Dawit-DNA\FreelanceTech\FreelanceTech\obj\Debug\netcoreapp3.1\Razor\Views\Freelancers\Edit.cshtml.g.cs
+C:\Users\Awhole\source\repos\Dawit-DNA\FreelanceTech\FreelanceTech\obj\Debug\netcoreapp3.1\Razor\Views\Freelancers\Index.cshtml.g.cs
+C:\Users\Awhole\source\repos\Dawit-DNA\FreelanceTech\FreelanceTech\obj\Debug\netcoreapp3.1\Razor\Views\Shared\DashboardLayout.cshtml.g.cs
+C:\Users\Awhole\source\repos\Dawit-DNA\FreelanceTech\FreelanceTech\obj\Debug\netcoreapp3.1\Razor\Views\Wallets\Create.cshtml.g.cs
+C:\Users\Awhole\source\repos\Dawit-DNA\FreelanceTech\FreelanceTech\obj\Debug\netcoreapp3.1\Razor\Views\Wallets\Delete.cshtml.g.cs
+C:\Users\Awhole\source\repos\Dawit-DNA\FreelanceTech\FreelanceTech\obj\Debug\netcoreapp3.1\Razor\Views\Wallets\Details.cshtml.g.cs
+C:\Users\Awhole\source\repos\Dawit-DNA\FreelanceTech\FreelanceTech\obj\Debug\netcoreapp3.1\Razor\Views\Wallets\Edit.cshtml.g.cs
+C:\Users\Awhole\source\repos\Dawit-DNA\FreelanceTech\FreelanceTech\obj\Debug\netcoreapp3.1\Razor\Views\Wallets\Index.cshtml.g.cs

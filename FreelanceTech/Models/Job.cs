@@ -32,5 +32,7 @@ namespace FreelanceTech.Models
         public int rate { get; set; }
         public string description { get; set; }
         public DateTime postedDate { get; set; }
+        public List<JobSkill> JobSkill { get; set; }
+
     }
 }
