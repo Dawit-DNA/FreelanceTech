@@ -22,11 +22,12 @@ namespace FreelanceTech.Controllers
         // GET: Jobs
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Job.ToListAsync());
+            var applicationDbContext = _context.Job.Include(j => j.Customer);
+            return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Jobs/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(string id)
         {
             if (id == null)
             {
@@ -34,7 +35,8 @@ namespace FreelanceTech.Controllers
             }
 
             var job = await _context.Job
-                .FirstOrDefaultAsync(m => m.Job_id == id);
+                .Include(j => j.Customer)
+                .FirstOrDefaultAsync(m => m.jobId == id);
             if (job == null)
             {
                 return NotFound();
@@ -46,6 +48,7 @@ namespace FreelanceTech.Controllers
         // GET: Jobs/Create
         public IActionResult Create()
         {
+            ViewData["customerId"] = new SelectList(_context.Customer, "customerId", "customerId");
             return View();
         }
 
@@ -54,7 +57,7 @@ namespace FreelanceTech.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Job_id,Type,Start_Date,End_Date,Level,Payment_Amount,Status,Customer_ID,Freelancer_ID,Review")] Job job)
+        public async Task<IActionResult> Create([Bind("jobId,status,title,category,startDate,endDate,startPrice,endPrice,level,Payment_Amount,customerId,freelancerId,contractId,businessAnalystId,comment,rate,description,postedDate")] Job job)
         {
             if (ModelState.IsValid)
             {
@@ -62,11 +65,12 @@ namespace FreelanceTech.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["customerId"] = new SelectList(_context.Customer, "customerId", "customerId", job.customerId);
             return View(job);
         }
 
         // GET: Jobs/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
             {
@@ -78,6 +82,7 @@ namespace FreelanceTech.Controllers
             {
                 return NotFound();
             }
+            ViewData["customerId"] = new SelectList(_context.Customer, "customerId", "customerId", job.customerId);
             return View(job);
         }
 
@@ -86,9 +91,9 @@ namespace FreelanceTech.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Job_id,Type,Start_Date,End_Date,Level,Payment_Amount,Status,Customer_ID,Freelancer_ID,Review")] Job job)
+        public async Task<IActionResult> Edit(string id, [Bind("jobId,status,title,category,startDate,endDate,startPrice,endPrice,level,Payment_Amount,customerId,freelancerId,contractId,businessAnalystId,comment,rate,description,postedDate")] Job job)
         {
-            if (id != job.Job_id)
+            if (id != job.jobId)
             {
                 return NotFound();
             }
@@ -102,7 +107,7 @@ namespace FreelanceTech.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!JobExists(job.Job_id))
+                    if (!JobExists(job.jobId))
                     {
                         return NotFound();
                     }
@@ -113,11 +118,12 @@ namespace FreelanceTech.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["customerId"] = new SelectList(_context.Customer, "customerId", "customerId", job.customerId);
             return View(job);
         }
 
         // GET: Jobs/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
             {
@@ -125,7 +131,8 @@ namespace FreelanceTech.Controllers
             }
 
             var job = await _context.Job
-                .FirstOrDefaultAsync(m => m.Job_id == id);
+                .Include(j => j.Customer)
+                .FirstOrDefaultAsync(m => m.jobId == id);
             if (job == null)
             {
                 return NotFound();
@@ -137,7 +144,7 @@ namespace FreelanceTech.Controllers
         // POST: Jobs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(string id)
         {
             var job = await _context.Job.FindAsync(id);
             _context.Job.Remove(job);
@@ -145,9 +152,9 @@ namespace FreelanceTech.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool JobExists(int id)
+        private bool JobExists(string id)
         {
-            return _context.Job.Any(e => e.Job_id == id);
+            return _context.Job.Any(e => e.jobId == id);
         }
     }
 }

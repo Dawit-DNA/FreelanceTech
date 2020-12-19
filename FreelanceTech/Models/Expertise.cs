@@ -8,8 +8,8 @@ namespace FreelanceTech.Models
     {
         public int id { get; set; }
         public string freelancerId { get; set; }
-        public string category { get; set; }
-        public string skill  { get; set; }
+        public int category { get; set; }
+        public int skill  { get; set; }
         public string status { get; set; }
         public string level { get; set; }
     }

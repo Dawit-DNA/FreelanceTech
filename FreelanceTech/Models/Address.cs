@@ -5,7 +5,7 @@ namespace FreelanceTech.Models
     public class Address
     {
         [Key]
-        public int userId { get; set; }
+        public string userId { get; set; }
         public string region { get; set; }
         public string city { get; set; }
         public string woreda { get; set; }

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FreelanceTech.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201218202744_FreelancerTrail3")]
-    partial class FreelancerTrail3
+    [Migration("20201219062002_enumuratedTypeAdded")]
+    partial class enumuratedTypeAdded
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,10 +23,8 @@ namespace FreelanceTech.Migrations
 
             modelBuilder.Entity("FreelanceTech.Models.Address", b =>
                 {
-                    b.Property<int>("userId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("userId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("city")
                         .HasColumnType("nvarchar(max)");
@@ -101,8 +99,8 @@ namespace FreelanceTech.Migrations
                     b.Property<string>("WalletuserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int?>("addressuserId")
-                        .HasColumnType("int");
+                    b.Property<string>("addressuserId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("englishProficiency")
                         .HasColumnType("nvarchar(max)");
@@ -110,14 +108,14 @@ namespace FreelanceTech.Migrations
                     b.Property<int>("language")
                         .HasColumnType("int");
 
-                    b.Property<byte[]>("legalId")
-                        .HasColumnType("varbinary(max)");
+                    b.Property<string>("legalId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("phoneNumber")
                         .HasColumnType("int");
 
-                    b.Property<byte[]>("photo")
-                        .HasColumnType("varbinary(max)");
+                    b.Property<string>("photo")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("status")
                         .HasColumnType("nvarchar(max)");
@@ -175,8 +173,8 @@ namespace FreelanceTech.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("category")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("category")
+                        .HasColumnType("int");
 
                     b.Property<string>("freelancerId")
                         .HasColumnType("nvarchar(450)");
@@ -184,8 +182,8 @@ namespace FreelanceTech.Migrations
                     b.Property<string>("level")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("skill")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("skill")
+                        .HasColumnType("int");
 
                     b.Property<string>("status")
                         .HasColumnType("nvarchar(max)");
@@ -204,8 +202,8 @@ namespace FreelanceTech.Migrations
                     b.Property<string>("freelancerId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int?>("AddressuserId")
-                        .HasColumnType("int");
+                    b.Property<string>("AddressuserId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("WalletuserId")
                         .HasColumnType("nvarchar(450)");
@@ -213,23 +211,23 @@ namespace FreelanceTech.Migrations
                     b.Property<string>("education")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("englishProficiency")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("englishProficiency")
+                        .HasColumnType("int");
 
-                    b.Property<string>("hourlyRate")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<double>("hourlyRate")
+                        .HasColumnType("float");
 
                     b.Property<int>("id")
                         .HasColumnType("int");
 
-                    b.Property<byte[]>("legaID")
-                        .HasColumnType("varbinary(max)");
+                    b.Property<string>("legaID")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("phoneNumber")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte[]>("photo")
-                        .HasColumnType("varbinary(max)");
+                    b.Property<string>("photo")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("professionalOverview")
                         .HasColumnType("nvarchar(max)");
@@ -240,8 +238,8 @@ namespace FreelanceTech.Migrations
                     b.Property<double>("score")
                         .HasColumnType("float");
 
-                    b.Property<string>("status")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("status")
+                        .HasColumnType("int");
 
                     b.Property<string>("title")
                         .HasColumnType("nvarchar(max)");
@@ -353,8 +351,8 @@ namespace FreelanceTech.Migrations
                     b.Property<string>("freelancerId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("language")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("language")
+                        .HasColumnType("int");
 
                     b.Property<string>("userId")
                         .HasColumnType("nvarchar(max)");

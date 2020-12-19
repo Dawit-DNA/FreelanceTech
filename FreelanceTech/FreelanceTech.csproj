@@ -9,36 +9,39 @@
     <Compile Remove="Views\Adminstrators\**" />
     <Compile Remove="Views\Bids\**" />
     <Compile Remove="Views\Categories\**" />
-    <Compile Remove="Views\Customers\**" />
     <Compile Remove="Views\FreelancerUsers\**" />
-    <Compile Remove="Views\Jobs\**" />
     <Content Remove="Views\Adminstrators\**" />
     <Content Remove="Views\Bids\**" />
     <Content Remove="Views\Categories\**" />
-    <Content Remove="Views\Customers\**" />
     <Content Remove="Views\FreelancerUsers\**" />
-    <Content Remove="Views\Jobs\**" />
     <EmbeddedResource Remove="Views\Adminstrators\**" />
     <EmbeddedResource Remove="Views\Bids\**" />
     <EmbeddedResource Remove="Views\Categories\**" />
-    <EmbeddedResource Remove="Views\Customers\**" />
     <EmbeddedResource Remove="Views\FreelancerUsers\**" />
-    <EmbeddedResource Remove="Views\Jobs\**" />
     <None Remove="Views\Adminstrators\**" />
     <None Remove="Views\Bids\**" />
     <None Remove="Views\Categories\**" />
-    <None Remove="Views\Customers\**" />
     <None Remove="Views\FreelancerUsers\**" />
-    <None Remove="Views\Jobs\**" />
   </ItemGroup>
 
   <ItemGroup>
     <Compile Remove="Controllers\AdminstratorsController.cs" />
     <Compile Remove="Controllers\BidsController.cs" />
     <Compile Remove="Controllers\CategoriesController.cs" />
-    <Compile Remove="Controllers\CustomersController.cs" />
     <Compile Remove="Controllers\FreelancerUsersController.cs" />
     <Compile Remove="Controllers\JobsController.cs" />
+    <Compile Remove="Migrations\20201207094438_FrelancerTrial.cs" />
+    <Compile Remove="Migrations\20201207094438_FrelancerTrial.Designer.cs" />
+    <Compile Remove="Migrations\20201211115854_FreelancerTrial2.cs" />
+    <Compile Remove="Migrations\20201211115854_FreelancerTrial2.Designer.cs" />
+    <Compile Remove="Migrations\20201218202744_FreelancerTrail3.cs" />
+    <Compile Remove="Migrations\20201218202744_FreelancerTrail3.Designer.cs" />
+    <Compile Remove="Migrations\20201218223754_PhotoDatatypeChanged.cs" />
+    <Compile Remove="Migrations\20201218223754_PhotoDatatypeChanged.Designer.cs" />
+    <Compile Remove="Migrations\20201218225300_NewFromScratch.cs" />
+    <Compile Remove="Migrations\20201218225300_NewFromScratch.Designer.cs" />
+    <Compile Remove="Migrations\20201219060814_enumuratedTypeAdded.cs" />
+    <Compile Remove="Migrations\20201219060814_enumuratedTypeAdded.Designer.cs" />
     <Compile Remove="Models\Adminstrator.cs" />
     <Compile Remove="Models\BussinessAnalyst.cs" />
     <Compile Remove="Models\ProjectManager.cs" />
@@ -69,6 +72,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Views\Customers\Create.cshtml" />
+    <None Include="Views\Customers\Delete.cshtml" />
+    <None Include="Views\Customers\Details.cshtml" />
+    <None Include="Views\Customers\Edit.cshtml" />
+    <None Include="Views\Customers\Index.cshtml" />
+    <None Include="Views\Jobs\Create.cshtml" />
+    <None Include="Views\Jobs\Delete.cshtml" />
+    <None Include="Views\Jobs\Details.cshtml" />
+    <None Include="Views\Jobs\Edit.cshtml" />
+    <None Include="Views\Jobs\Index.cshtml" />
     <None Include="wwwroot\startbootstrap-agency-gh-pages\assets\img\close-icon.svg" />
     <None Include="wwwroot\startbootstrap-agency-gh-pages\assets\img\navbar-logo.svg" />
     <None Include="wwwroot\startbootstrap-agency-gh-pages\assets\mail\contact_me.js" />

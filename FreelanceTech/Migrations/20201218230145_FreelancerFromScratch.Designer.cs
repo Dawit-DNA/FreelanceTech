@@ -10,23 +10,21 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FreelanceTech.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201207094438_FrelancerTrial")]
-    partial class FrelancerTrial
+    [Migration("20201218230145_FreelancerFromScratch")]
+    partial class FreelancerFromScratch
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.9")
+                .HasAnnotation("ProductVersion", "3.1.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("FreelanceTech.Models.Address", b =>
                 {
-                    b.Property<int>("userId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("userId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("city")
                         .HasColumnType("nvarchar(max)");
@@ -72,11 +70,14 @@ namespace FreelanceTech.Migrations
                     b.Property<string>("contractId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("file")
-                        .HasColumnType("int");
+                    b.Property<string>("file")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("jobId")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("signedDate")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("contractId");
 
@@ -92,11 +93,14 @@ namespace FreelanceTech.Migrations
                     b.Property<string>("customerId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<int?>("Languageid")
+                        .HasColumnType("int");
+
                     b.Property<string>("WalletuserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int?>("addressuserId")
-                        .HasColumnType("int");
+                    b.Property<string>("addressuserId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("englishProficiency")
                         .HasColumnType("nvarchar(max)");
@@ -104,28 +108,25 @@ namespace FreelanceTech.Migrations
                     b.Property<int>("language")
                         .HasColumnType("int");
 
-                    b.Property<string>("language1")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("legalId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("phoneNumber")
                         .HasColumnType("int");
 
-                    b.Property<byte[]>("photo")
-                        .HasColumnType("varbinary(max)");
+                    b.Property<string>("photo")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("status")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("customerId");
 
+                    b.HasIndex("Languageid");
+
                     b.HasIndex("WalletuserId");
 
                     b.HasIndex("addressuserId");
-
-                    b.HasIndex("language1");
 
                     b.ToTable("Customer");
                 });
@@ -167,7 +168,7 @@ namespace FreelanceTech.Migrations
 
             modelBuilder.Entity("FreelanceTech.Models.Expertise", b =>
                 {
-                    b.Property<int>("categoryId")
+                    b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -175,7 +176,23 @@ namespace FreelanceTech.Migrations
                     b.Property<string>("category")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("categoryId");
+                    b.Property<string>("freelancerId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("level")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("skill")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("status")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("freelancerId")
+                        .IsUnique()
+                        .HasFilter("[freelancerId] IS NOT NULL");
 
                     b.ToTable("Expertise");
                 });
@@ -185,11 +202,8 @@ namespace FreelanceTech.Migrations
                     b.Property<string>("freelancerId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int?>("AddressuserId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ExpertisecategoryId")
-                        .HasColumnType("int");
+                    b.Property<string>("AddressuserId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("WalletuserId")
                         .HasColumnType("nvarchar(450)");
@@ -206,17 +220,14 @@ namespace FreelanceTech.Migrations
                     b.Property<int>("id")
                         .HasColumnType("int");
 
-                    b.Property<string>("language")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<byte[]>("legaID")
-                        .HasColumnType("varbinary(max)");
+                    b.Property<string>("legaID")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("phoneNumber")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte[]>("photo")
-                        .HasColumnType("varbinary(max)");
+                    b.Property<string>("photo")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("professionalOverview")
                         .HasColumnType("nvarchar(max)");
@@ -237,11 +248,7 @@ namespace FreelanceTech.Migrations
 
                     b.HasIndex("AddressuserId");
 
-                    b.HasIndex("ExpertisecategoryId");
-
                     b.HasIndex("WalletuserId");
-
-                    b.HasIndex("language");
 
                     b.ToTable("Freelancer");
                 });
@@ -287,6 +294,9 @@ namespace FreelanceTech.Migrations
                     b.Property<string>("level")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("postedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("rate")
                         .HasColumnType("int");
 
@@ -311,15 +321,45 @@ namespace FreelanceTech.Migrations
                     b.ToTable("Job");
                 });
 
+            modelBuilder.Entity("FreelanceTech.Models.JobSkill", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("jobId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("skill")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("jobId");
+
+                    b.ToTable("JobSkill");
+                });
+
             modelBuilder.Entity("FreelanceTech.Models.Language", b =>
                 {
-                    b.Property<string>("language")
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("freelancerId")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("language")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("userId")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("language");
+                    b.HasKey("id");
+
+                    b.HasIndex("freelancerId");
 
                     b.ToTable("Language");
                 });
@@ -613,6 +653,10 @@ namespace FreelanceTech.Migrations
 
             modelBuilder.Entity("FreelanceTech.Models.Customer", b =>
                 {
+                    b.HasOne("FreelanceTech.Models.Language", "Language")
+                        .WithMany()
+                        .HasForeignKey("Languageid");
+
                     b.HasOne("FreelanceTech.Models.Wallet", "Wallet")
                         .WithMany()
                         .HasForeignKey("WalletuserId");
@@ -620,10 +664,6 @@ namespace FreelanceTech.Migrations
                     b.HasOne("FreelanceTech.Models.Address", "address")
                         .WithMany()
                         .HasForeignKey("addressuserId");
-
-                    b.HasOne("FreelanceTech.Models.Language", "Language")
-                        .WithMany()
-                        .HasForeignKey("language1");
                 });
 
             modelBuilder.Entity("FreelanceTech.Models.Experience", b =>
@@ -633,23 +673,22 @@ namespace FreelanceTech.Migrations
                         .HasForeignKey("FreelanceTech.Models.Experience", "freelancerId");
                 });
 
+            modelBuilder.Entity("FreelanceTech.Models.Expertise", b =>
+                {
+                    b.HasOne("FreelanceTech.Models.Freelancer", null)
+                        .WithOne("Expertise")
+                        .HasForeignKey("FreelanceTech.Models.Expertise", "freelancerId");
+                });
+
             modelBuilder.Entity("FreelanceTech.Models.Freelancer", b =>
                 {
                     b.HasOne("FreelanceTech.Models.Address", "Address")
                         .WithMany()
                         .HasForeignKey("AddressuserId");
 
-                    b.HasOne("FreelanceTech.Models.Expertise", "Expertise")
-                        .WithMany()
-                        .HasForeignKey("ExpertisecategoryId");
-
                     b.HasOne("FreelanceTech.Models.Wallet", "Wallet")
                         .WithMany()
                         .HasForeignKey("WalletuserId");
-
-                    b.HasOne("FreelanceTech.Models.Language", "Language")
-                        .WithMany()
-                        .HasForeignKey("language");
                 });
 
             modelBuilder.Entity("FreelanceTech.Models.Job", b =>
@@ -661,6 +700,20 @@ namespace FreelanceTech.Migrations
                     b.HasOne("FreelanceTech.Models.Freelancer", "Freelancer")
                         .WithMany("Job")
                         .HasForeignKey("freelancerId1");
+                });
+
+            modelBuilder.Entity("FreelanceTech.Models.JobSkill", b =>
+                {
+                    b.HasOne("FreelanceTech.Models.Job", "Job")
+                        .WithMany("JobSkill")
+                        .HasForeignKey("jobId");
+                });
+
+            modelBuilder.Entity("FreelanceTech.Models.Language", b =>
+                {
+                    b.HasOne("FreelanceTech.Models.Freelancer", null)
+                        .WithMany("Language")
+                        .HasForeignKey("freelancerId");
                 });
 
             modelBuilder.Entity("FreelanceTech.Models.Proposal", b =>

@@ -908,3 +908,14 @@ C:\Users\Awhole\source\repos\Dawit-DNA\FreelanceTech\FreelanceTech\obj\Debug\net
 C:\Users\Awhole\source\repos\Dawit-DNA\FreelanceTech\FreelanceTech\obj\Debug\netcoreapp3.1\Razor\Views\Wallets\Details.cshtml.g.cs
 C:\Users\Awhole\source\repos\Dawit-DNA\FreelanceTech\FreelanceTech\obj\Debug\netcoreapp3.1\Razor\Views\Wallets\Edit.cshtml.g.cs
 C:\Users\Awhole\source\repos\Dawit-DNA\FreelanceTech\FreelanceTech\obj\Debug\netcoreapp3.1\Razor\Views\Wallets\Index.cshtml.g.cs
+C:\Users\Awhole\source\repos\Dawit-DNA\FreelanceTech\FreelanceTech\obj\Debug\netcoreapp3.1\Razor\Views\Freelancers\Register.cshtml.g.cs
+C:\Users\Awhole\source\repos\Dawit-DNA\FreelanceTech\FreelanceTech\obj\Debug\netcoreapp3.1\Razor\Views\Customers\Create.cshtml.g.cs
+C:\Users\Awhole\source\repos\Dawit-DNA\FreelanceTech\FreelanceTech\obj\Debug\netcoreapp3.1\Razor\Views\Customers\Delete.cshtml.g.cs
+C:\Users\Awhole\source\repos\Dawit-DNA\FreelanceTech\FreelanceTech\obj\Debug\netcoreapp3.1\Razor\Views\Customers\Details.cshtml.g.cs
+C:\Users\Awhole\source\repos\Dawit-DNA\FreelanceTech\FreelanceTech\obj\Debug\netcoreapp3.1\Razor\Views\Customers\Edit.cshtml.g.cs
+C:\Users\Awhole\source\repos\Dawit-DNA\FreelanceTech\FreelanceTech\obj\Debug\netcoreapp3.1\Razor\Views\Customers\Index.cshtml.g.cs
+C:\Users\Awhole\source\repos\Dawit-DNA\FreelanceTech\FreelanceTech\obj\Debug\netcoreapp3.1\Razor\Views\Jobs\Create.cshtml.g.cs
+C:\Users\Awhole\source\repos\Dawit-DNA\FreelanceTech\FreelanceTech\obj\Debug\netcoreapp3.1\Razor\Views\Jobs\Delete.cshtml.g.cs
+C:\Users\Awhole\source\repos\Dawit-DNA\FreelanceTech\FreelanceTech\obj\Debug\netcoreapp3.1\Razor\Views\Jobs\Details.cshtml.g.cs
+C:\Users\Awhole\source\repos\Dawit-DNA\FreelanceTech\FreelanceTech\obj\Debug\netcoreapp3.1\Razor\Views\Jobs\Edit.cshtml.g.cs
+C:\Users\Awhole\source\repos\Dawit-DNA\FreelanceTech\FreelanceTech\obj\Debug\netcoreapp3.1\Razor\Views\Jobs\Index.cshtml.g.cs

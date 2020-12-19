@@ -1,10 +1,10 @@
-﻿@model Freelancer.Models.Customer
+﻿@model FreelanceTech.Models.Customer
 
 @{
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<h2>Edit</h2>
 
 <h4>Customer</h4>
 <hr />
@@ -12,29 +12,39 @@
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="id" />
+            <input type="hidden" asp-for="customerId" />
             <div class="form-group">
-                <label asp-for="First_Name" class="control-label"></label>
-                <input asp-for="First_Name" class="form-control" />
-                <span asp-validation-for="First_Name" class="text-danger"></span>
+                <label asp-for="photo" class="control-label"></label>
+                <input asp-for="photo" class="form-control" />
+                <span asp-validation-for="photo" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Last_Name" class="control-label"></label>
-                <input asp-for="Last_Name" class="form-control" />
-                <span asp-validation-for="Last_Name" class="text-danger"></span>
+                <label asp-for="legalId" class="control-label"></label>
+                <input asp-for="legalId" class="form-control" />
+                <span asp-validation-for="legalId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
+                <label asp-for="status" class="control-label"></label>
+                <input asp-for="status" class="form-control" />
+                <span asp-validation-for="status" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Phone_Number" class="control-label"></label>
-                <input asp-for="Phone_Number" class="form-control" />
-                <span asp-validation-for="Phone_Number" class="text-danger"></span>
+                <label asp-for="language" class="control-label"></label>
+                <input asp-for="language" class="form-control" />
+                <span asp-validation-for="language" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <label asp-for="phoneNumber" class="control-label"></label>
+                <input asp-for="phoneNumber" class="form-control" />
+                <span asp-validation-for="phoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="englishProficiency" class="control-label"></label>
+                <input asp-for="englishProficiency" class="form-control" />
+                <span asp-validation-for="englishProficiency" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </form>
     </div>

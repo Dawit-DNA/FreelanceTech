@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FreelanceTech.Data;
-using Freelancer.Models;
+using FreelanceTech.Models;
 
 namespace FreelanceTech.Controllers
 {
@@ -26,7 +26,7 @@ namespace FreelanceTech.Controllers
         }
 
         // GET: Customers/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(string id)
         {
             if (id == null)
             {
@@ -34,7 +34,7 @@ namespace FreelanceTech.Controllers
             }
 
             var customer = await _context.Customer
-                .FirstOrDefaultAsync(m => m.id == id);
+                .FirstOrDefaultAsync(m => m.customerId == id);
             if (customer == null)
             {
                 return NotFound();
@@ -54,7 +54,7 @@ namespace FreelanceTech.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,First_Name,Last_Name,Email,Phone_Number")] Customer customer)
+        public async Task<IActionResult> Create([Bind("customerId,photo,legalId,status,language,phoneNumber,englishProficiency")] Customer customer)
         {
             if (ModelState.IsValid)
             {
@@ -66,7 +66,7 @@ namespace FreelanceTech.Controllers
         }
 
         // GET: Customers/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
             {
@@ -86,9 +86,9 @@ namespace FreelanceTech.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,First_Name,Last_Name,Email,Phone_Number")] Customer customer)
+        public async Task<IActionResult> Edit(string id, [Bind("customerId,photo,legalId,status,language,phoneNumber,englishProficiency")] Customer customer)
         {
-            if (id != customer.id)
+            if (id != customer.customerId)
             {
                 return NotFound();
             }
@@ -102,7 +102,7 @@ namespace FreelanceTech.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CustomerExists(customer.id))
+                    if (!CustomerExists(customer.customerId))
                     {
                         return NotFound();
                     }
@@ -117,7 +117,7 @@ namespace FreelanceTech.Controllers
         }
 
         // GET: Customers/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
             {
@@ -125,7 +125,7 @@ namespace FreelanceTech.Controllers
             }
 
             var customer = await _context.Customer
-                .FirstOrDefaultAsync(m => m.id == id);
+                .FirstOrDefaultAsync(m => m.customerId == id);
             if (customer == null)
             {
                 return NotFound();
@@ -137,7 +137,7 @@ namespace FreelanceTech.Controllers
         // POST: Customers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(string id)
         {
             var customer = await _context.Customer.FindAsync(id);
             _context.Customer.Remove(customer);
@@ -145,9 +145,9 @@ namespace FreelanceTech.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CustomerExists(int id)
+        private bool CustomerExists(string id)
         {
-            return _context.Customer.Any(e => e.id == id);
+            return _context.Customer.Any(e => e.customerId == id);
         }
     }
 }

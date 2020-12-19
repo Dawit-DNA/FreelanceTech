@@ -7,8 +7,8 @@ namespace FreelanceTech.Models
 {
         [Key]
         public string customerId { get; set; }
-        public byte[] photo { get; set; }
-        public byte[] legalId { get; set; }
+        public string photo { get; set; }
+        public string legalId { get; set; }
         public string status { get; set; }
         public int language { get; set; }
         public int phoneNumber { get; set; }

@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h2>Index</h2>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -13,31 +13,55 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Type)
+                @Html.DisplayNameFor(model => model.status)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Start_Date)
+                @Html.DisplayNameFor(model => model.title)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.End_Date)
+                @Html.DisplayNameFor(model => model.category)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Level)
+                @Html.DisplayNameFor(model => model.startDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.endDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.startPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.endPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.level)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Payment_Amount)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Status)
+                @Html.DisplayNameFor(model => model.Customer)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Customer_ID)
+                @Html.DisplayNameFor(model => model.freelancerId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Freelancer_ID)
+                @Html.DisplayNameFor(model => model.contractId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Review)
+                @Html.DisplayNameFor(model => model.businessAnalystId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.comment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.rate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.postedDate)
             </th>
             <th></th>
         </tr>
@@ -46,36 +70,60 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Type)
+                @Html.DisplayFor(modelItem => item.status)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Start_Date)
+                @Html.DisplayFor(modelItem => item.title)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.End_Date)
+                @Html.DisplayFor(modelItem => item.category)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Level)
+                @Html.DisplayFor(modelItem => item.startDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.endDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.startPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.endPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.level)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Payment_Amount)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Status)
+                @Html.DisplayFor(modelItem => item.Customer.customerId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Customer_ID)
+                @Html.DisplayFor(modelItem => item.freelancerId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Freelancer_ID)
+                @Html.DisplayFor(modelItem => item.contractId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Review)
+                @Html.DisplayFor(modelItem => item.businessAnalystId)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Job_id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Job_id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Job_id">Delete</a>
+                @Html.DisplayFor(modelItem => item.comment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.rate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.postedDate)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.jobId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.jobId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.jobId">Delete</a>
             </td>
         </tr>
 }

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FreelanceTech.Migrations
 {
-    public partial class FrelancerTrial : Migration
+    public partial class FreelancerFromScratch : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,8 +11,7 @@ namespace FreelanceTech.Migrations
                 name: "Address",
                 columns: table => new
                 {
-                    userId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    userId = table.Column<string>(nullable: false),
                     region = table.Column<string>(nullable: true),
                     city = table.Column<string>(nullable: true),
                     woreda = table.Column<string>(nullable: true),
@@ -39,31 +38,6 @@ namespace FreelanceTech.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Expertise",
-                columns: table => new
-                {
-                    categoryId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    category = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Expertise", x => x.categoryId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Language",
-                columns: table => new
-                {
-                    language = table.Column<string>(nullable: false),
-                    userId = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Language", x => x.language);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Wallet",
                 columns: table => new
                 {
@@ -76,61 +50,21 @@ namespace FreelanceTech.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Customer",
-                columns: table => new
-                {
-                    customerId = table.Column<string>(nullable: false),
-                    photo = table.Column<byte[]>(nullable: true),
-                    legalId = table.Column<byte[]>(nullable: true),
-                    status = table.Column<string>(nullable: true),
-                    language = table.Column<int>(nullable: false),
-                    phoneNumber = table.Column<int>(nullable: false),
-                    addressuserId = table.Column<int>(nullable: true),
-                    language1 = table.Column<string>(nullable: true),
-                    WalletuserId = table.Column<string>(nullable: true),
-                    englishProficiency = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Customer", x => x.customerId);
-                    table.ForeignKey(
-                        name: "FK_Customer_Wallet_WalletuserId",
-                        column: x => x.WalletuserId,
-                        principalTable: "Wallet",
-                        principalColumn: "userId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Customer_Address_addressuserId",
-                        column: x => x.addressuserId,
-                        principalTable: "Address",
-                        principalColumn: "userId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Customer_Language_language1",
-                        column: x => x.language1,
-                        principalTable: "Language",
-                        principalColumn: "language",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Freelancer",
                 columns: table => new
                 {
                     freelancerId = table.Column<string>(nullable: false),
                     phoneNumber = table.Column<string>(nullable: true),
-                    ExpertisecategoryId = table.Column<int>(nullable: true),
                     education = table.Column<string>(nullable: true),
                     id = table.Column<int>(nullable: false),
-                    language = table.Column<string>(nullable: true),
                     englishProficiency = table.Column<string>(nullable: true),
                     hourlyRate = table.Column<string>(nullable: true),
                     title = table.Column<string>(nullable: true),
                     professionalOverview = table.Column<string>(nullable: true),
-                    photo = table.Column<byte[]>(nullable: true),
-                    AddressuserId = table.Column<int>(nullable: true),
+                    photo = table.Column<string>(nullable: true),
+                    AddressuserId = table.Column<string>(nullable: true),
                     WalletuserId = table.Column<string>(nullable: true),
-                    legaID = table.Column<byte[]>(nullable: true),
+                    legaID = table.Column<string>(nullable: true),
                     rate = table.Column<double>(nullable: false),
                     score = table.Column<double>(nullable: false),
                     status = table.Column<string>(nullable: true)
@@ -145,22 +79,10 @@ namespace FreelanceTech.Migrations
                         principalColumn: "userId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Freelancer_Expertise_ExpertisecategoryId",
-                        column: x => x.ExpertisecategoryId,
-                        principalTable: "Expertise",
-                        principalColumn: "categoryId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
                         name: "FK_Freelancer_Wallet_WalletuserId",
                         column: x => x.WalletuserId,
                         principalTable: "Wallet",
                         principalColumn: "userId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Freelancer_Language_language",
-                        column: x => x.language,
-                        principalTable: "Language",
-                        principalColumn: "language",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -189,6 +111,88 @@ namespace FreelanceTech.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Expertise",
+                columns: table => new
+                {
+                    id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    freelancerId = table.Column<string>(nullable: true),
+                    category = table.Column<string>(nullable: true),
+                    skill = table.Column<string>(nullable: true),
+                    status = table.Column<string>(nullable: true),
+                    level = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Expertise", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_Expertise_Freelancer_freelancerId",
+                        column: x => x.freelancerId,
+                        principalTable: "Freelancer",
+                        principalColumn: "freelancerId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Language",
+                columns: table => new
+                {
+                    id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    language = table.Column<string>(nullable: true),
+                    userId = table.Column<string>(nullable: true),
+                    freelancerId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Language", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_Language_Freelancer_freelancerId",
+                        column: x => x.freelancerId,
+                        principalTable: "Freelancer",
+                        principalColumn: "freelancerId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Customer",
+                columns: table => new
+                {
+                    customerId = table.Column<string>(nullable: false),
+                    photo = table.Column<string>(nullable: true),
+                    legalId = table.Column<string>(nullable: true),
+                    status = table.Column<string>(nullable: true),
+                    language = table.Column<int>(nullable: false),
+                    phoneNumber = table.Column<int>(nullable: false),
+                    addressuserId = table.Column<string>(nullable: true),
+                    Languageid = table.Column<int>(nullable: true),
+                    WalletuserId = table.Column<string>(nullable: true),
+                    englishProficiency = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Customer", x => x.customerId);
+                    table.ForeignKey(
+                        name: "FK_Customer_Language_Languageid",
+                        column: x => x.Languageid,
+                        principalTable: "Language",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Customer_Wallet_WalletuserId",
+                        column: x => x.WalletuserId,
+                        principalTable: "Wallet",
+                        principalColumn: "userId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Customer_Address_addressuserId",
+                        column: x => x.addressuserId,
+                        principalTable: "Address",
+                        principalColumn: "userId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Job",
                 columns: table => new
                 {
@@ -209,7 +213,8 @@ namespace FreelanceTech.Migrations
                     businessAnalystId = table.Column<string>(nullable: true),
                     comment = table.Column<string>(nullable: true),
                     rate = table.Column<int>(nullable: false),
-                    description = table.Column<string>(nullable: true)
+                    description = table.Column<string>(nullable: true),
+                    postedDate = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -261,14 +266,35 @@ namespace FreelanceTech.Migrations
                 columns: table => new
                 {
                     contractId = table.Column<string>(nullable: false),
-                    file = table.Column<int>(nullable: false),
-                    jobId = table.Column<string>(nullable: true)
+                    file = table.Column<string>(nullable: true),
+                    jobId = table.Column<string>(nullable: true),
+                    signedDate = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Contract", x => x.contractId);
                     table.ForeignKey(
                         name: "FK_Contract_Job_jobId",
+                        column: x => x.jobId,
+                        principalTable: "Job",
+                        principalColumn: "jobId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "JobSkill",
+                columns: table => new
+                {
+                    id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    jobId = table.Column<string>(nullable: true),
+                    skill = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_JobSkill", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_JobSkill_Job_jobId",
                         column: x => x.jobId,
                         principalTable: "Job",
                         principalColumn: "jobId",
@@ -311,6 +337,11 @@ namespace FreelanceTech.Migrations
                 filter: "[jobId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Customer_Languageid",
+                table: "Customer",
+                column: "Languageid");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Customer_WalletuserId",
                 table: "Customer",
                 column: "WalletuserId");
@@ -321,13 +352,15 @@ namespace FreelanceTech.Migrations
                 column: "addressuserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Customer_language1",
-                table: "Customer",
-                column: "language1");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Experience_freelancerId",
                 table: "Experience",
+                column: "freelancerId",
+                unique: true,
+                filter: "[freelancerId] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Expertise_freelancerId",
+                table: "Expertise",
                 column: "freelancerId",
                 unique: true,
                 filter: "[freelancerId] IS NOT NULL");
@@ -338,19 +371,9 @@ namespace FreelanceTech.Migrations
                 column: "AddressuserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Freelancer_ExpertisecategoryId",
-                table: "Freelancer",
-                column: "ExpertisecategoryId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Freelancer_WalletuserId",
                 table: "Freelancer",
                 column: "WalletuserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Freelancer_language",
-                table: "Freelancer",
-                column: "language");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Job_customerId",
@@ -361,6 +384,16 @@ namespace FreelanceTech.Migrations
                 name: "IX_Job_freelancerId1",
                 table: "Job",
                 column: "freelancerId1");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_JobSkill_jobId",
+                table: "JobSkill",
+                column: "jobId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Language_freelancerId",
+                table: "Language",
+                column: "freelancerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Proposal_freelancerId1",
@@ -395,6 +428,12 @@ namespace FreelanceTech.Migrations
                 name: "Experience");
 
             migrationBuilder.DropTable(
+                name: "Expertise");
+
+            migrationBuilder.DropTable(
+                name: "JobSkill");
+
+            migrationBuilder.DropTable(
                 name: "Proposal");
 
             migrationBuilder.DropTable(
@@ -407,19 +446,16 @@ namespace FreelanceTech.Migrations
                 name: "Customer");
 
             migrationBuilder.DropTable(
+                name: "Language");
+
+            migrationBuilder.DropTable(
                 name: "Freelancer");
 
             migrationBuilder.DropTable(
                 name: "Address");
 
             migrationBuilder.DropTable(
-                name: "Expertise");
-
-            migrationBuilder.DropTable(
                 name: "Wallet");
-
-            migrationBuilder.DropTable(
-                name: "Language");
         }
     }
 }
