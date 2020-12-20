@@ -11,11 +11,14 @@ using FreelanceTech.ViewModel;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
 using Shared.Web.MvcExtensions;
+using FreelanceTech.Areas.Identity.Pages.Account;
+
 
 namespace FreelanceTech.Controllers
 {
     public class FreelancersController : Controller
     {
+        string currentUser = RegisterModel.registeredUser;
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _hostingEnvironment;
 
@@ -26,6 +29,7 @@ namespace FreelanceTech.Controllers
         }
         public IActionResult Register()
         {
+          
             return View();
         }
         // GET: Freelancers
@@ -33,6 +37,7 @@ namespace FreelanceTech.Controllers
         public async Task<IActionResult> Index()
         {
             return View(await _context.Freelancer.ToListAsync());
+            //return View(User.GetUserId());
         }
 
         // GET: Freelancers/Details/5
@@ -58,7 +63,7 @@ namespace FreelanceTech.Controllers
         {
             return View();
         }
-
+       
 
         // POST: Freelancers/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
@@ -73,8 +78,10 @@ namespace FreelanceTech.Controllers
                 Freelancer freelancer = new Freelancer();
 
                 
-                freelancer.freelancerId = this.User.GetUserId();
+                freelancer.freelancerId = currentUser;
+                
                 freelancer.englishProficiency = (int)viewmodel.englishProficiency;
+                string userId = User.GetUserId();
                 freelancer.hourlyRate = Convert.ToDouble(viewmodel.hourlyRate);
                 freelancer.photo = uniqueFileName;
                 freelancer.title = viewmodel.title;
@@ -83,7 +90,7 @@ namespace FreelanceTech.Controllers
                 freelancer.professionalOverview = viewmodel.professionalOverview;
 
                 Language lang = new Language();
-                lang.userId = this.User.GetUserId();
+                lang.userId = currentUser;
                 lang.language = (int)viewmodel.language;
 
                 Address address = new Address();
@@ -92,7 +99,7 @@ namespace FreelanceTech.Controllers
                 address.woreda = viewmodel.woreda;
                 address.houseNumber = Convert.ToInt32(viewmodel.houseNumber.ToString());
                 address.pobox = Convert.ToInt32(viewmodel.pobox.ToString());
-                address.userId = this.User.GetUserId();
+                address.userId = currentUser;
 
                 Expertise expertise = new Expertise();
                 expertise.skill = (int)viewmodel.skill;
@@ -102,7 +109,7 @@ namespace FreelanceTech.Controllers
                 experience.companyName = viewmodel.companyName;
                 experience.title = viewmodel.expTitle;
                 experience.description = viewmodel.description;
-                experience.freelancerId = this.User.GetUserId();
+                experience.freelancerId = currentUser;
                 experience.location = viewmodel.location;
                 experience.startDate = viewmodel.startDate;
                 experience.endDate = viewmodel.endDate;
@@ -110,8 +117,7 @@ namespace FreelanceTech.Controllers
 
                _context.Add(freelancer);
                 await _context.SaveChangesAsync();
-
-               _context.Add(address);
+                _context.Add(address);
                 await _context.SaveChangesAsync();
 
                 _context.Add(expertise);
@@ -119,6 +125,7 @@ namespace FreelanceTech.Controllers
 
                 _context.Add(experience);
                 await _context.SaveChangesAsync();
+
 
                 _context.Add(lang);
                 await _context.SaveChangesAsync();

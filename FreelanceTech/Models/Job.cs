@@ -10,6 +10,7 @@ namespace FreelanceTech.Models
     public class Job
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string jobId { get; set; }
         public string status { get; set; }
         public string title { get; set; }

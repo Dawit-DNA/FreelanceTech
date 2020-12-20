@@ -24,6 +24,7 @@ namespace FreelanceTech.Areas.Identity.Pages.Account
         private readonly UserManager<User> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        public static string registeredUser;
 
         public RegisterModel(
             UserManager<User> userManager,
@@ -83,6 +84,7 @@ namespace FreelanceTech.Areas.Identity.Pages.Account
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+                    registeredUser = user.Id;
                     var callbackUrl = Url.Page(
                         "/Account/ConfirmEmail",
                         pageHandler: null,
