@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FreelanceTech.Data;
 using FreelanceTech.Models;
@@ -88,6 +87,7 @@ namespace FreelanceTech.Controllers
                 freelancer.status = (int)Constants.status.Active;
                 freelancer.phoneNumber = viewmodel.phoneNumber;
                 freelancer.professionalOverview = viewmodel.professionalOverview;
+                freelancer.education = viewmodel.education;
 
                 Language lang = new Language();
                 lang.userId = currentUser;
@@ -104,6 +104,8 @@ namespace FreelanceTech.Controllers
                 Expertise expertise = new Expertise();
                 expertise.skill = (int)viewmodel.skill;
                 expertise.category = (int)viewmodel.category;
+                expertise.level = viewmodel.expertiseStatus;
+                expertise.status = "not verified";
 
                 Experience experience = new Experience();
                 experience.companyName = viewmodel.companyName;
