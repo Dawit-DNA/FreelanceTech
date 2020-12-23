@@ -9,6 +9,7 @@ namespace FreelanceTech.Models
         public string region { get; set; }
         public string city { get; set; }
         public string woreda { get; set; }
+        public string subSity { get; set; }
         public int houseNumber { get; set; }
         public int pobox { get; set; }
     }

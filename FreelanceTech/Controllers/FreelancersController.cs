@@ -39,7 +39,7 @@ namespace FreelanceTech.Controllers
         public async Task<IActionResult> Index()
         {
 
-/*           var freelancer = await _context.Freelancer
+          var freelancer = await _context.Freelancer
                  .FirstOrDefaultAsync(m => m.freelancerId == currentUser);
             var address = await _context.Address
                  .FirstOrDefaultAsync(m => m.userId == currentUser);
@@ -47,9 +47,8 @@ namespace FreelanceTech.Controllers
                  .FirstOrDefaultAsync(m => m.freelancerId == currentUser);
             var user = await _context.Users
                 .FirstOrDefaultAsync(m => m.Id == currentUser);
-            *//*Job*/
-            /*            var  = await _context.Freelancer
-                             .FirstOrDefaultAsync(m => m.freelancerId == currentUser);*//*
+            //Job  var  = await _context.Freelancer
+            //                 .FirstOrDefaultAsync(m => m.freelancerId == currentUser);
             FreelancerViewModel model = new FreelancerViewModel();
            
             model.freelancerId = freelancer.freelancerId;
@@ -59,7 +58,7 @@ namespace FreelanceTech.Controllers
             model.score = freelancer.score;
             model.lastName = user.lastName;
             model.firstName = user.firstName;
-           *//* model.expertiseStatus = expertise.status;*//*
+           /* model.expertiseStatus = expertise.status;*//*
             model.professionalOverview = freelancer.professionalOverview;
             model.hourlyRate = freelancer.hourlyRate;
             *//*model.photo = freelancer.photo;*//*
@@ -181,6 +180,21 @@ namespace FreelanceTech.Controllers
 
         // GET: Freelancers/Edit/5
         public async Task<IActionResult> Edit(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var freelancer = await _context.Freelancer.FindAsync(id);
+            if (freelancer == null)
+            {
+                return NotFound();
+            }
+            return View(freelancer);
+        }
+
+        public async Task<IActionResult> requestSkillVerification(string id)
         {
             if (id == null)
             {

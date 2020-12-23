@@ -10,7 +10,6 @@ namespace FreelanceTech.Models
         public string phoneNumber { get; set; }
         public Expertise Expertise { get; set; }
         public string education { get; set; }
-        public int id { get; set; }
         public Experience Experience { get; set; }
         public List<Language> Language { get; set; }
         public int englishProficiency { get; set; }

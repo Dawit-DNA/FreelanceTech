@@ -12,8 +12,9 @@ namespace FreelanceTech.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string chatId { get; set; }
+        public string jobId { get; set; }
         public string firstUser { get; set; }
         public string secondUser { get; set; }
-        public byte[] chatItself { get; set; }
+        public string chatItself { get; set; }
     }
 }

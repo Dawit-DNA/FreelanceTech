@@ -12,12 +12,13 @@ namespace FreelanceTech.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string proposalId { get; set; }
-            public string jobId { get; set; }
-            public Job Job { get; set; }
-            public int freelancerId { get; set; }
-            public Freelancer Freelancer { get; set; }
-            public string description { get; set; }
-            public double bidAmount { get; set; }
+        public string jobId { get; set; }
+        public Job Job { get; set; }
+        public string freelancerId { get; set; }
+        public Freelancer Freelancer { get; set; }
+        public string description { get; set; }
+        public double bidAmount { get; set; }
+        public string answers { get; set; }
 
     }
 }
