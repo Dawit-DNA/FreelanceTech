@@ -4,11 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using FreelanceTech.Models;
-
 namespace FreelanceTech.ViewModel
 {
-    public class CreateFreelancerViewModel
+    public class FreelancerViewModel
     {
+
         public string freelancerId { get; set; }
         public string phoneNumber { get; set; }
         public string education { get; set; }
@@ -26,9 +26,13 @@ namespace FreelanceTech.ViewModel
         public int houseNumber { get; set; }
         public int pobox { get; set; }
 
+        public string firstName { get; set; }
+        public string lastName { get; set; }
+        public string type { get; set; }
+        public double rate { get; set; }
+        public double score { get; set; }
 
-    
-     
+
         public string expertiseStatus { get; set; }
         public string level { get; set; }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FreelanceTech.Data;
 using FreelanceTech.Models;
@@ -11,6 +12,7 @@ using Microsoft.AspNetCore.Hosting;
 using System.IO;
 using Shared.Web.MvcExtensions;
 using FreelanceTech.Areas.Identity.Pages.Account;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace FreelanceTech.Controllers
@@ -26,6 +28,7 @@ namespace FreelanceTech.Controllers
             _context = context;
             _hostingEnvironment = hostingEnvironment;
         }
+      
         public IActionResult Register()
         {
           
@@ -35,8 +38,34 @@ namespace FreelanceTech.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Freelancer.ToListAsync());
-            //return View(User.GetUserId());
+
+/*           var freelancer = await _context.Freelancer
+                 .FirstOrDefaultAsync(m => m.freelancerId == currentUser);
+            var address = await _context.Address
+                 .FirstOrDefaultAsync(m => m.userId == currentUser);
+            var expertise = await _context.Expertise
+                 .FirstOrDefaultAsync(m => m.freelancerId == currentUser);
+            var user = await _context.Users
+                .FirstOrDefaultAsync(m => m.Id == currentUser);
+            *//*Job*/
+            /*            var  = await _context.Freelancer
+                             .FirstOrDefaultAsync(m => m.freelancerId == currentUser);*//*
+            FreelancerViewModel model = new FreelancerViewModel();
+           
+            model.freelancerId = freelancer.freelancerId;
+            model.phoneNumber = freelancer.phoneNumber;
+            model.title = freelancer.title;
+            model.rate = freelancer.rate;
+            model.score = freelancer.score;
+            model.lastName = user.lastName;
+            model.firstName = user.firstName;
+           *//* model.expertiseStatus = expertise.status;*//*
+            model.professionalOverview = freelancer.professionalOverview;
+            model.hourlyRate = freelancer.hourlyRate;
+            *//*model.photo = freelancer.photo;*//*
+
+            model.houseNumber = address.houseNumber;*/
+            return View();
         }
 
         // GET: Freelancers/Details/5
@@ -57,18 +86,14 @@ namespace FreelanceTech.Controllers
             return View(freelancer);
         }
 
-        // GET: Freelancers/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-       
+      
 
         // POST: Freelancers/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+   
         public async Task<IActionResult> Register(CreateFreelancerViewModel viewmodel)
         {
             if (ModelState.IsValid)
@@ -76,9 +101,9 @@ namespace FreelanceTech.Controllers
                 string uniqueFileName = ProcessUploadedFile(viewmodel);
                 Freelancer freelancer = new Freelancer();
 
-                
+
                 freelancer.freelancerId = currentUser;
-                
+
                 freelancer.englishProficiency = (int)viewmodel.englishProficiency;
                 string userId = User.GetUserId();
                 freelancer.hourlyRate = Convert.ToDouble(viewmodel.hourlyRate);
@@ -87,7 +112,6 @@ namespace FreelanceTech.Controllers
                 freelancer.status = (int)Constants.status.Active;
                 freelancer.phoneNumber = viewmodel.phoneNumber;
                 freelancer.professionalOverview = viewmodel.professionalOverview;
-                freelancer.education = viewmodel.education;
 
                 Language lang = new Language();
                 lang.userId = currentUser;
@@ -116,8 +140,7 @@ namespace FreelanceTech.Controllers
                 experience.startDate = viewmodel.startDate;
                 experience.endDate = viewmodel.endDate;
 
-
-               _context.Add(freelancer);
+                _context.Add(freelancer);
                 await _context.SaveChangesAsync();
                 _context.Add(address);
                 await _context.SaveChangesAsync();
@@ -131,12 +154,14 @@ namespace FreelanceTech.Controllers
 
                 _context.Add(lang);
                 await _context.SaveChangesAsync();
+             
 
 
                 return RedirectToAction(nameof(Index));
             }
             return View(viewmodel);
         }
+
         private string ProcessUploadedFile(CreateFreelancerViewModel model)
         {
             string uniqueFileName = null;

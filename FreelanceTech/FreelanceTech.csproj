@@ -65,13 +65,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Customer\Controllers\" />
-    <Folder Include="Areas\Customer\Data\" />
-    <Folder Include="Areas\Customer\Models\" />
-    <Folder Include="Areas\Customer\Views\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="Views\Customers\Create.cshtml" />
     <None Include="Views\Customers\Delete.cshtml" />
     <None Include="Views\Customers\Details.cshtml" />
