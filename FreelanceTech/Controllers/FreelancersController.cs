@@ -13,22 +13,54 @@ using System.IO;
 using Shared.Web.MvcExtensions;
 using FreelanceTech.Areas.Identity.Pages.Account;
 using Microsoft.AspNetCore.Authorization;
-
+using Microsoft.Extensions.Logging;
+using YenePaySdk;
+using System.Diagnostics;
 
 namespace FreelanceTech.Controllers
 {
     public class FreelancersController : Controller
     {
-        string currentUser = RegisterModel.registeredUser;
+        
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _hostingEnvironment;
+        private string currentUser;
 
-        public FreelancersController(ApplicationDbContext context, IWebHostEnvironment hostingEnvironment)
+        private readonly IProposalRepository proposalRepository;
+        private readonly IWalletRepository walletRepository;
+
+
+        public FreelancersController(ApplicationDbContext context = null, IWebHostEnvironment hostingEnvironment = null, IProposalRepository proposalRepository = null, IWalletRepository walletRepository = null)
         {
+            currentUser = RegisterModel.registeredUser;
+            this.proposalRepository = proposalRepository;
+            this.walletRepository = walletRepository;
             _context = context;
             _hostingEnvironment = hostingEnvironment;
+
+
         }
-      
+        [HttpGet]
+        public IActionResult SubmitProposal()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult SubmitProposal(Proposal proposal)
+        {
+            if (ModelState.IsValid)
+            {
+                Random rnd = new Random();
+                string id = rnd.Next().ToString();
+                proposal.proposalId = id;
+                proposal.freelancerId = "1";
+                proposal.jobId = "1";
+                proposalRepository.SubmitProposal(proposal);
+                return View();
+            }
+            return View();
+        }
+
         public IActionResult Register()
         {
           
@@ -99,7 +131,6 @@ namespace FreelanceTech.Controllers
             {
                 string uniqueFileName = ProcessUploadedFile(viewmodel);
                 Freelancer freelancer = new Freelancer();
-
 
                 freelancer.freelancerId = currentUser;
 
@@ -277,5 +308,9 @@ namespace FreelanceTech.Controllers
         {
             return _context.Freelancer.Any(e => e.freelancerId == id);
         }
+
+
+
+
     }
 }

@@ -1,0 +1,58 @@
+﻿@{ 
+    Layout = "DashboardLayout";
+    @model Proposal;
+}
+    @*<div style="background-color: white;">
+        <form asp-controller="Freelancers" asp-action="SubmitProposal" method="post" class="mt-3">
+            <div>
+                <label asp-for="bidAmount">Proposed Payment:  </label>
+                <input asp-for="bidAmount" class="col-md-3"/>
+            </div>
+            <div>
+                <label asp-for="description">Description</label> <br />
+                <textarea asp-for="description" cols="90" rows="15"></textarea> <br />
+            </div>
+            <div>
+                <label asp-for="answers">Answer Question</label> <br />
+                <textarea asp-for="answers" cols="90" rows="15"></textarea> <br />
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>*@
+    <div class="x_content">
+        <br>
+        <form id="demo-form2" asp-controller="Freelancers" asp-action="SubmitProposal" method="post" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
+
+            <div class="item form-group">
+                <label class="col-form-label col-md-3 col-sm-3 label-align" asp-for="bidAmount">
+                    Payment Amount: <span class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6 ">
+                    <input type="text" id="first-name" required="required" class="form-control" asp-for="bidAmount">
+                </div>
+            </div>
+            <div class="item form-group">
+                <label class="col-form-label col-md-3 col-sm-3 label-align" asp-for="answers">
+                    Answers: 
+                </label>
+                <div class="col-md-6 col-sm-6 ">
+                    <textarea asp-for="answers" class="form-control" rows="9">
+                        Enter Answers to Job Questions Here
+                    </textarea>
+                </div>
+            </div>
+            <div class="item form-group">
+                <label asp-for="description" class="col-form-label col-md-3 col-sm-3 label-align">Description</label>
+                <div class="col-md-6 col-sm-6 ">
+                    <textarea asp-for="description" rows="9" class="form-control"></textarea>
+                </div>
+            </div>
+            <div class="ln_solid"></div>
+            <div class="item form-group">
+                <div class="col-md-6 col-sm-6 offset-md-3">
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </div>
+            </div>
+
+        </form>
+    </div>

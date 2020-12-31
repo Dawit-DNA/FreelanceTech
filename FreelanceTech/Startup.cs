@@ -38,7 +38,9 @@ namespace FreelanceTech
             services.AddControllersWithViews();
             services.AddTransient<IEmailSender, EmailSender>();
             services.Configure<AuthMessageSenderOptions>(Configuration);
-
+            services.AddScoped<IProposalRepository, SqlProposalRepository>();
+            services.AddScoped<IWalletRepository, SqlWalletRepository>();
+            services.AddScoped<IJobRepository, SqlJobRepository>();
             services.AddRazorPages();
        
         }

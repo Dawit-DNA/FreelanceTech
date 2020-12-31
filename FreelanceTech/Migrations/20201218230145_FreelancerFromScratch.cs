@@ -56,7 +56,6 @@ namespace FreelanceTech.Migrations
                     freelancerId = table.Column<string>(nullable: false),
                     phoneNumber = table.Column<string>(nullable: true),
                     education = table.Column<string>(nullable: true),
-                    id = table.Column<int>(nullable: false),
                     englishProficiency = table.Column<string>(nullable: true),
                     hourlyRate = table.Column<string>(nullable: true),
                     title = table.Column<string>(nullable: true),
@@ -207,8 +206,7 @@ namespace FreelanceTech.Migrations
                     level = table.Column<string>(nullable: true),
                     Payment_Amount = table.Column<double>(nullable: false),
                     customerId = table.Column<string>(nullable: true),
-                    freelancerId = table.Column<int>(nullable: false),
-                    freelancerId1 = table.Column<string>(nullable: true),
+                    freelancerId = table.Column<string>(nullable: false),
                     contractId = table.Column<int>(nullable: false),
                     businessAnalystId = table.Column<string>(nullable: true),
                     comment = table.Column<string>(nullable: true),
@@ -226,8 +224,8 @@ namespace FreelanceTech.Migrations
                         principalColumn: "customerId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Job_Freelancer_freelancerId1",
-                        column: x => x.freelancerId1,
+                        name: "FK_Job_Freelancer_freelancerId",
+                        column: x => x.freelancerId,
                         principalTable: "Freelancer",
                         principalColumn: "freelancerId",
                         onDelete: ReferentialAction.Restrict);
@@ -308,7 +306,6 @@ namespace FreelanceTech.Migrations
                     proposalId = table.Column<string>(nullable: false),
                     jobId = table.Column<string>(nullable: true),
                     freelancerId = table.Column<int>(nullable: false),
-                    freelancerId1 = table.Column<string>(nullable: true),
                     description = table.Column<string>(nullable: true),
                     bidAmount = table.Column<double>(nullable: false)
                 },
@@ -316,8 +313,8 @@ namespace FreelanceTech.Migrations
                 {
                     table.PrimaryKey("PK_Proposal", x => x.proposalId);
                     table.ForeignKey(
-                        name: "FK_Proposal_Freelancer_freelancerId1",
-                        column: x => x.freelancerId1,
+                        name: "FK_Proposal_Freelancer_freelancerId",
+                        column: x => x.freelancerId,
                         principalTable: "Freelancer",
                         principalColumn: "freelancerId",
                         onDelete: ReferentialAction.Restrict);
@@ -381,9 +378,9 @@ namespace FreelanceTech.Migrations
                 column: "customerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Job_freelancerId1",
+                name: "IX_Job_freelancerId",
                 table: "Job",
-                column: "freelancerId1");
+                column: "freelancerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_JobSkill_jobId",
@@ -396,9 +393,9 @@ namespace FreelanceTech.Migrations
                 column: "freelancerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Proposal_freelancerId1",
+                name: "IX_Proposal_freelancerId",
                 table: "Proposal",
-                column: "freelancerId1");
+                column: "freelancerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Proposal_jobId",

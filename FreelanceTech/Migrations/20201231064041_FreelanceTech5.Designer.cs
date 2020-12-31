@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FreelanceTech.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201218230145_FreelancerFromScratch")]
-    partial class FreelancerFromScratch
+    [Migration("20201231064041_FreelanceTech5")]
+    partial class FreelanceTech5
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -38,6 +38,9 @@ namespace FreelanceTech.Migrations
                     b.Property<string>("region")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("subSity")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("woreda")
                         .HasColumnType("nvarchar(max)");
 
@@ -49,12 +52,16 @@ namespace FreelanceTech.Migrations
             modelBuilder.Entity("FreelanceTech.Models.Chat", b =>
                 {
                     b.Property<string>("chatId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<byte[]>("chatItself")
-                        .HasColumnType("varbinary(max)");
+                    b.Property<string>("chatItself")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("firstUser")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("jobId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("secondUser")
@@ -102,8 +109,8 @@ namespace FreelanceTech.Migrations
                     b.Property<string>("addressuserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("englishProficiency")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("englishProficiency")
+                        .HasColumnType("int");
 
                     b.Property<int>("language")
                         .HasColumnType("int");
@@ -111,14 +118,14 @@ namespace FreelanceTech.Migrations
                     b.Property<string>("legalId")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("phoneNumber")
-                        .HasColumnType("int");
+                    b.Property<string>("phoneNumber")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("photo")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("status")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("status")
+                        .HasColumnType("int");
 
                     b.HasKey("customerId");
 
@@ -134,6 +141,7 @@ namespace FreelanceTech.Migrations
             modelBuilder.Entity("FreelanceTech.Models.Experience", b =>
                 {
                     b.Property<string>("id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("companyName")
@@ -173,8 +181,8 @@ namespace FreelanceTech.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("category")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("category")
+                        .HasColumnType("int");
 
                     b.Property<string>("freelancerId")
                         .HasColumnType("nvarchar(450)");
@@ -182,8 +190,8 @@ namespace FreelanceTech.Migrations
                     b.Property<string>("level")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("skill")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("skill")
+                        .HasColumnType("int");
 
                     b.Property<string>("status")
                         .HasColumnType("nvarchar(max)");
@@ -211,14 +219,11 @@ namespace FreelanceTech.Migrations
                     b.Property<string>("education")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("englishProficiency")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("hourlyRate")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("id")
+                    b.Property<int>("englishProficiency")
                         .HasColumnType("int");
+
+                    b.Property<double>("hourlyRate")
+                        .HasColumnType("float");
 
                     b.Property<string>("legaID")
                         .HasColumnType("nvarchar(max)");
@@ -238,8 +243,8 @@ namespace FreelanceTech.Migrations
                     b.Property<double>("score")
                         .HasColumnType("float");
 
-                    b.Property<string>("status")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("status")
+                        .HasColumnType("int");
 
                     b.Property<string>("title")
                         .HasColumnType("nvarchar(max)");
@@ -256,6 +261,7 @@ namespace FreelanceTech.Migrations
             modelBuilder.Entity("FreelanceTech.Models.Job", b =>
                 {
                     b.Property<string>("jobId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<double>("Payment_Amount")
@@ -285,9 +291,6 @@ namespace FreelanceTech.Migrations
                     b.Property<double>("endPrice")
                         .HasColumnType("float");
 
-                    b.Property<int>("freelancerId")
-                        .HasColumnType("int");
-
                     b.Property<string>("freelancerId")
                         .HasColumnType("nvarchar(450)");
 
@@ -296,6 +299,9 @@ namespace FreelanceTech.Migrations
 
                     b.Property<DateTime>("postedDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("questions")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("rate")
                         .HasColumnType("int");
@@ -351,8 +357,8 @@ namespace FreelanceTech.Migrations
                     b.Property<string>("freelancerId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("language")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("language")
+                        .HasColumnType("int");
 
                     b.Property<string>("userId")
                         .HasColumnType("nvarchar(max)");
@@ -367,16 +373,17 @@ namespace FreelanceTech.Migrations
             modelBuilder.Entity("FreelanceTech.Models.Proposal", b =>
                 {
                     b.Property<string>("proposalId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("answers")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("bidAmount")
                         .HasColumnType("float");
 
                     b.Property<string>("description")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("freelancerId")
-                        .HasColumnType("int");
 
                     b.Property<string>("freelancerId")
                         .HasColumnType("nvarchar(450)");
@@ -396,6 +403,7 @@ namespace FreelanceTech.Migrations
             modelBuilder.Entity("FreelanceTech.Models.Transaction", b =>
                 {
                     b.Property<string>("transactionId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<double>("amount")

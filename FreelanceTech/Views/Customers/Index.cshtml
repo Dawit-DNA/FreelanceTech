@@ -1,8 +1,8 @@
-﻿@model IEnumerable<FreelanceTech.Models.Customer>
+﻿@model FreelanceTech.ViewModel.CustomerViewModel;
 
 @{
     ViewData["Title"] = "Index";
-    Layout = "DashboardLayout";
+    Layout = "_CustomerDashboardLayout";
 }
 <head>
     <!-- Bootstrap -->
@@ -172,7 +172,7 @@
                         </li>
                     </ul>
                     <!-- end of user messages -->
-                    </divclass=">
+                    </div>
 
 
                 </div>
@@ -195,6 +195,7 @@
 
         <!-- Custom Theme Scripts -->
         <script src="../gentelella-master/build/js/custom.min.js"></script>
+    </div>
 </body>
 
 @*<h2>Index</h2>

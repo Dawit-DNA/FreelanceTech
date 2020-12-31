@@ -291,7 +291,7 @@ namespace FreelanceTech.Migrations
                     b.Property<int>("freelancerId")
                         .HasColumnType("int");
 
-                    b.Property<string>("freelancerId1")
+                    b.Property<string>("freelancerId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("level")
@@ -319,7 +319,7 @@ namespace FreelanceTech.Migrations
 
                     b.HasIndex("customerId");
 
-                    b.HasIndex("freelancerId1");
+                    b.HasIndex("freelancerId");
 
                     b.ToTable("Job");
                 });
@@ -382,7 +382,7 @@ namespace FreelanceTech.Migrations
                     b.Property<int>("freelancerId")
                         .HasColumnType("int");
 
-                    b.Property<string>("freelancerId1")
+                    b.Property<string>("freelancerId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("jobId")
@@ -390,7 +390,7 @@ namespace FreelanceTech.Migrations
 
                     b.HasKey("proposalId");
 
-                    b.HasIndex("freelancerId1");
+                    b.HasIndex("freelancerId");
 
                     b.HasIndex("jobId");
 
@@ -704,7 +704,7 @@ namespace FreelanceTech.Migrations
 
                     b.HasOne("FreelanceTech.Models.Freelancer", "Freelancer")
                         .WithMany("Job")
-                        .HasForeignKey("freelancerId1");
+                        .HasForeignKey("freelancerId");
                 });
 
             modelBuilder.Entity("FreelanceTech.Models.JobSkill", b =>
@@ -725,7 +725,7 @@ namespace FreelanceTech.Migrations
                 {
                     b.HasOne("FreelanceTech.Models.Freelancer", "Freelancer")
                         .WithMany("Proposal")
-                        .HasForeignKey("freelancerId1");
+                        .HasForeignKey("freelancerId");
 
                     b.HasOne("FreelanceTech.Models.Job", "Job")
                         .WithMany("Proposal")

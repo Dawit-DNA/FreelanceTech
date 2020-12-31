@@ -1,0 +1,274 @@
+﻿@{
+    Layout = "DashboardLayout";
+    @model Job;
+}
+
+<body class="nav-md">
+    <div class="container body">
+
+
+        <!-- page content -->
+        <div class="right_col " role="main">
+            <div class="">
+                <div class="page-title">
+                    <div class="title_left">
+                        <h3>Job Post Wizard</h3>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <div class="row">
+
+                        <div class="col-md-12 col-sm-12 ">
+                            <div class="x_panel">
+
+                                <div class="x_content">
+
+
+                                     @*Smart Wizard*@ 
+                                    <p>Fill out these Information to post a Job.</p>
+                                    <div id="wizard" class="form_wizard wizard_horizontal">
+                                        <ul class="wizard_steps">
+                                            <li>
+                                                <a href="#step-1">
+                                                    <span class="step_no">1</span>
+                                                    <span class="step_descr">
+                                                        Step 1<br />
+                                                        <medium>Title and Description</medium>
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#step-2">
+                                                    <span class="step_no">2</span>
+                                                    <span class="step_descr">
+                                                        Step 2<br />
+                                                        <Medium>Education</Medium>
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#step-3">
+                                                    <span class="step_no">3</span>
+                                                    <span class="step_descr">
+                                                        Step 3<br />
+                                                        <medium>Experience</medium>
+                                                    </span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        <form enctype="multipart/form-data" id="mainForm" class="form-horizontal form-label-left" asp-controller="Customer" asp-action="PostJob" method="post">
+                                            <div id="step-1">
+                                                <div class="form-group row">
+                                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">
+                                                        Title <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 ">
+                                                        <input asp-for="title" required="required" class="form-control  ">
+                                                    </div>
+                                                </div>
+                                                <div class="x_panel" width="50px" height="50px">
+                                                    <div class="x_title">
+                                                        <h2>Description</h2>
+                                                        <ul class="nav navbar-right panel_toolbox">
+                                                            <li>
+                                                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                                            </li>
+                                                            <li class="dropdown">
+                                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                                    <a class="dropdown-item" href="#">Settings 1</a>
+                                                                    <a class="dropdown-item" href="#">Settings 2</a>
+                                                                </div>
+                                                            </li>
+                                                            <li>
+                                                                <a class="close-link"><i class="fa fa-close"></i></a>
+                                                            </li>
+                                                        </ul>
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                    <div class="x_content">
+                                                        <div id="alerts"></div>
+                                                        <div class="btn-toolbar editor" data-role="editor-toolbar" data-target="#editor-one">
+                                                            <div class="btn-group">
+                                                                <a class="btn dropdown-toggle" data-toggle="dropdown" title="Font"><i class="fa fa-font"></i><b class="caret"></b></a>
+                                                                <ul class="dropdown-menu">
+                                                                </ul>
+                                                            </div>
+
+                                                            <div class="btn-group">
+                                                                <a class="btn dropdown-toggle" data-toggle="dropdown" title="Font Size"><i class="fa fa-text-height"></i>&nbsp;<b class="caret"></b></a>
+                                                                <ul class="dropdown-menu">
+                                                                    <li>
+                                                                        <a data-edit="fontSize 5">
+                                                                            <p style="font-size:17px">Huge</p>
+                                                                        </a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a data-edit="fontSize 3">
+                                                                            <p style="font-size:14px">Normal</p>
+                                                                        </a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a data-edit="fontSize 1">
+                                                                            <p style="font-size:11px">Small</p>
+                                                                        </a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+
+                                                            <div class="btn-group">
+                                                                <a class="btn" data-edit="bold" title="Bold (Ctrl/Cmd+B)"><i class="fa fa-bold"></i></a>
+                                                                <a class="btn" data-edit="italic" title="Italic (Ctrl/Cmd+I)"><i class="fa fa-italic"></i></a>
+                                                                <a class="btn" data-edit="strikethrough" title="Strikethrough"><i class="fa fa-strikethrough"></i></a>
+                                                                <a class="btn" data-edit="underline" title="Underline (Ctrl/Cmd+U)"><i class="fa fa-underline"></i></a>
+                                                            </div>
+
+                                                            <div class="btn-group">
+                                                                <a class="btn" data-edit="insertunorderedlist" title="Bullet list"><i class="fa fa-list-ul"></i></a>
+                                                                <a class="btn" data-edit="insertorderedlist" title="Number list"><i class="fa fa-list-ol"></i></a>
+                                                                <a class="btn" data-edit="outdent" title="Reduce indent (Shift+Tab)"><i class="fa fa-dedent"></i></a>
+                                                                <a class="btn" data-edit="indent" title="Indent (Tab)"><i class="fa fa-indent"></i></a>
+                                                            </div>
+
+                                                            <div class="btn-group">
+                                                                <a class="btn" data-edit="justifyleft" title="Align Left (Ctrl/Cmd+L)"><i class="fa fa-align-left"></i></a>
+                                                                <a class="btn" data-edit="justifycenter" title="Center (Ctrl/Cmd+E)"><i class="fa fa-align-center"></i></a>
+                                                                <a class="btn" data-edit="justifyright" title="Align Right (Ctrl/Cmd+R)"><i class="fa fa-align-right"></i></a>
+                                                                <a class="btn" data-edit="justifyfull" title="Justify (Ctrl/Cmd+J)"><i class="fa fa-align-justify"></i></a>
+                                                            </div>
+
+                                                            <div class="btn-group">
+                                                                <a class="btn dropdown-toggle" data-toggle="dropdown" title="Hyperlink"><i class="fa fa-link"></i></a>
+                                                                <div class="dropdown-menu input-append">
+                                                                    <input class="span2" placeholder="URL" type="text" data-edit="createLink">
+                                                                    <button class="btn" type="button">Add</button>
+                                                                </div>
+                                                                <a class="btn" data-edit="unlink" title="Remove Hyperlink"><i class="fa fa-cut"></i></a>
+                                                            </div>
+
+
+                                                            <div class="btn-group">
+                                                                <a class="btn" data-edit="undo" title="Undo (Ctrl/Cmd+Z)"><i class="fa fa-undo"></i></a>
+                                                                <a class="btn" data-edit="redo" title="Redo (Ctrl/Cmd+Y)"><i class="fa fa-repeat"></i></a>
+                                                            </div>
+                                                        </div>
+                                                        <textarea asp-for="description" class="form-control" rows="10"></textarea>
+
+
+
+                                                        <br>
+
+                                                        <div class="ln_solid"></div>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                           
+                                            <div id="step-2">
+                                                <h2 class="StepTitle">Step 2 Content</h2>
+                                                <label class="control-label col-md-3 col-sm-3 ">Category</label>
+                                                <div class="col-md-9 col-sm-9 ">
+                                                    <select asp-for="category" class="form-control category" id="category">
+                                                        <option value="none" selected="selected">Choose option</option>
+                                                        <option value="Web Development">Web Development</option>
+                                                        <option value="Mobile Development">Mobile Development</option>
+                                                        <option value="Windows App Development">Windows App Development</option>
+                                                        <option value="Graphics Designer">Graphics Designer</option>
+                                                    </select>
+                                                </div>
+                                                <div>
+                                                    <label class="control-label col-md-3 col-sm-3 ">Skills</label>
+                                                    <div class="col-md-9 col-sm-9 ">
+                                                        <select class="select2_multiple form-control skills" id="skills" multiple="multiple">
+                                                        </select>
+                                                        <div id="suggestions-container" style="position: relative; float: left; width: 250px; margin: 10px;"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="step-3">
+                                                <h2 class="StepTitle">Step 3 Content</h2>
+                                                <label class="control-label col-md-3 col-sm-3 ">Level of Experience</label>
+                                                <div class="col-md-9 col-sm-9 ">
+                                                    <select asp-for="level" class="form-control">
+                                                        <option>Choose option</option>
+                                                        <option>Option one</option>
+                                                        <option>Option two</option>
+                                                        <option>Option three</option>
+                                                        <option>Option four</option>
+                                                    </select>
+                                                </div>
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <label class="col-form-label col-md-3 col-sm-3 label-align">
+                                                    Duration: From <span class="required">*</span>
+                                                </label>
+                                                <div class="col-md-9 col-sm-9 ">
+                                                    <input asp-for="startDate" class="date-picker form-control" placeholder="dd-mm-yyyy" type="text" required="required" onfocus="this.type='date'" onmouseover="this.type='date'" onclick="this.type='date'" onblur="this.type='text'" onmouseout="timeFunctionLong(this)" data-val="true" data-val-required="The startDate field is required." id="startDate" name="startDate" value="">
+                                                    <script>
+                                                        function timeFunctionLong(input) {
+                                                            setTimeout(function () {
+                                                                input.type = 'text';
+                                                            }, 60000);
+                                                        }
+                                                    </script>
+                                                </div>
+
+                                                <label class="col-form-label col-md-3 col-sm-3 label-align">
+                                                    To <span class="required">*</span>
+                                                </label>
+                                                <div class="col-md-9 col-sm-2 ">
+                                                    <input asp-for="endDate" class="date-picker form-control" placeholder="dd-mm-yyyy" type="date" required="required" onfocus="this.type='date'" onmouseover="this.type='date'" onclick="this.type='date'" onblur="this.type='text'" onmouseout="timeFunctionLong(this)" data-val="true" data-val-required="The endDate field is required." id="endDate" name="endDate" value="">
+                                                    <script>
+                                                        function timeFunctionLong(input) {
+                                                            setTimeout(function () {
+                                                                input.type = 'text';
+                                                            }, 60000);
+                                                        }
+                                                    </script>
+                                                </div>
+
+                                                <div>
+                                                    <label class="control-label col-md-3 col-sm-3 ">Price Range</label>
+                                                    <br />
+                                                    <br />
+                                                    <br />
+                                                    <div class="col-md-2 col-sm-6  form-group has-feedback">
+                                                        <input asp-for="startPrice" type="text" class="form-control has-feedback-left" id="inputSuccess2" placeholder="">
+                                                        <span class="fa fa-money form-control-feedback left" aria-hidden="true"></span>
+                                                    </div>
+
+                                                    <div class="col-md-2 col-sm-6  form-group has-feedback">
+                                                        <input asp-for="endPrice" type="text" class="form-control has-feedback-left" id="inputSuccess2" placeholder="">
+                                                        <span class="fa fa-money form-control-feedback left" aria-hidden="true"></span>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                    </form>
+                                    </div>
+                                    <!-- End SmartWizard Content -->
+                                    <!-- End SmartWizard Content -->
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /page content -->
+            <!-- footer content -->
+            <!--<footer>
+
+                <div class="clearfix"></div>
+            </footer>-->
+            <!-- /footer content -->
+        <!--</div>-->
+    </div>
+        
+
+    </div>
+
+</body>
