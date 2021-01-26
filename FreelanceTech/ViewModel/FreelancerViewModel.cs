@@ -15,7 +15,7 @@ namespace FreelanceTech.ViewModel
         public double hourlyRate { get; set; }
         public string title { get; set; }
         public string professionalOverview { get; set; }
-        public IFormFile photo { get; set; }
+        public string photo { get; set; }
         public string legaID { get; set; }
         public string status { get; set; }
 

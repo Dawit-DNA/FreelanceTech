@@ -7,22 +7,43 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FreelanceTech.Data;
 using FreelanceTech.Models;
+using FreelanceTech.Areas.Identity.Pages.Account;
+using FreelanceTech.ViewModel;
 
 namespace FreelanceTech.Controllers
 {
     public class WalletsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IWalletRepository walletRepository;
 
-        public WalletsController(ApplicationDbContext context)
+        public WalletsController(ApplicationDbContext context, IWalletRepository walletRepository)
         {
             _context = context;
+            this.walletRepository = walletRepository;
         }
 
         // GET: Wallets
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Wallet.ToListAsync());
+            string userId = RegisterModel.registeredUser;
+            var customer = await _context.Customer
+                  .FirstOrDefaultAsync(m => m.customerId == userId);
+            var address = await _context.Address
+                 .FirstOrDefaultAsync(m => m.userId == userId);
+            var user = await _context.Users
+                             .FirstOrDefaultAsync(m => m.Id == userId);
+            CustomerViewModel model = new CustomerViewModel();
+            model.customerId = customer.customerId;
+            model.phoneNumber = customer.phoneNumber;
+            model.lastName = user.lastName;
+            model.firstName = user.firstName;
+
+            model.photo = customer.photo;
+
+            Wallet wallet = walletRepository.Balance(RegisterModel.registeredUser);
+            model.wallet = wallet;
+            return View();
         }
 
         // GET: Wallets/Details/5

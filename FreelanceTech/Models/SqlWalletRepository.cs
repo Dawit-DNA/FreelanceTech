@@ -1,4 +1,6 @@
-﻿using FreelanceTech.Data;
+﻿using FreelanceTech.Areas.Identity.Pages.Account;
+using FreelanceTech.Data;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,17 +16,24 @@ namespace FreelanceTech.Models
         {
             this.applicationDbContext = applicationDbContext;
         }
-        public Wallet Balance(int Id)
+        public Wallet Balance(string Id)
         {
             return applicationDbContext.Wallet.Find(Id);
         }
 
         public bool Deposit(Wallet wallet)
         {
-            Wallet oldWallet = applicationDbContext.Wallet.Find(wallet.userId);
-            wallet.balance += oldWallet.balance;
-            applicationDbContext.Add(wallet);
-            applicationDbContext.SaveChanges();
+            Wallet oldWallet = applicationDbContext.Wallet.Find(RegisterModel.registeredUser);
+            if (oldWallet != null){
+                oldWallet.balance += wallet.balance;
+                applicationDbContext.Wallet.Update(oldWallet);
+                applicationDbContext.SaveChanges();
+            }
+            else
+            {
+                applicationDbContext.Wallet.Add(wallet);
+                applicationDbContext.SaveChanges();
+            }
             return true;
         }
     }

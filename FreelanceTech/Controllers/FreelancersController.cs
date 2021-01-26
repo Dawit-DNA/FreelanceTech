@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Logging;
 using YenePaySdk;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Http;
 
 namespace FreelanceTech.Controllers
 {
@@ -71,18 +72,19 @@ namespace FreelanceTech.Controllers
         public async Task<IActionResult> Index()
         {
 
-          var freelancer = await _context.Freelancer
-                 .FirstOrDefaultAsync(m => m.freelancerId == currentUser);
+            string userId = User.GetUserId();
+            var freelancer = await _context.Freelancer
+                  .FirstOrDefaultAsync(m => m.freelancerId == userId);
             var address = await _context.Address
-                 .FirstOrDefaultAsync(m => m.userId == currentUser);
+                 .FirstOrDefaultAsync(m => m.userId == userId);
             var expertise = await _context.Expertise
-                 .FirstOrDefaultAsync(m => m.freelancerId == currentUser);
+                 .FirstOrDefaultAsync(m => m.freelancerId == userId);
             var user = await _context.Users
-                .FirstOrDefaultAsync(m => m.Id == currentUser);
-            //Job  var  = await _context.Freelancer
-            //                 .FirstOrDefaultAsync(m => m.freelancerId == currentUser);
+                .FirstOrDefaultAsync(m => m.Id == userId);
+            var job = await _context.Job
+                             .FirstOrDefaultAsync(m => m.freelancerId == userId);
             FreelancerViewModel model = new FreelancerViewModel();
-           
+
             model.freelancerId = freelancer.freelancerId;
             model.phoneNumber = freelancer.phoneNumber;
             model.title = freelancer.title;
@@ -90,13 +92,15 @@ namespace FreelanceTech.Controllers
             model.score = freelancer.score;
             model.lastName = user.lastName;
             model.firstName = user.firstName;
-           /* model.expertiseStatus = expertise.status;*//*
+            model.region = address.region;
+            model.city = address.city;
+            model.expertiseStatus = "Unverified";
             model.professionalOverview = freelancer.professionalOverview;
             model.hourlyRate = freelancer.hourlyRate;
-            *//*model.photo = freelancer.photo;*//*
 
-            model.houseNumber = address.houseNumber;*/
-            return View();
+            model.photo = freelancer.photo;
+            model.houseNumber = address.houseNumber;
+            return View(model);
         }
 
         // GET: Freelancers/Details/5

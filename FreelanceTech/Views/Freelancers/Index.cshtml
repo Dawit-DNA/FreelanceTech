@@ -1,9 +1,9 @@
-﻿@model IEnumerable<FreelanceTech.Models.Freelancer>
+﻿@model FreelanceTech.ViewModel.FreelancerViewModel
 
 @{
     ViewData["Title"] = "Index";
-    Layout = "_CustomerDashboardLayout";
-    IEnumerable<Job> jobFeeds = ViewData["JobFeed"] as IEnumerable<Job>;
+    Layout = "DashboardLayout";
+    @*IEnumerable<Job> jobFeeds = ViewData["JobFeed"] as IEnumerable<Job>;*@
 }
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -20,9 +20,9 @@
     <link href="../gentelella-master/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- NProgress -->
     <link href="../gentelella-master/vendors/nprogress/nprogress.css" rel="stylesheet">
-    <!-- bootstrap-daterangepicker -->
-    <link href="../gentelella-master/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
-
+    <!-- bootstrap-daterangepicker -->@*
+        <link href="../gentelella-master/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    *@
     <!-- Custom Theme Style -->
     <link href="../gentelella-master/build/css/custom.min.css" rel="stylesheet">
 </head>
@@ -58,21 +58,21 @@
             <div class="x_panel">
                 <div class="x_title">
                     <h2>User Report <small>Activity report</small></h2>
-                    <ul class="nav navbar-right panel_toolbox">
+                    <!--<ul class="nav navbar-right panel_toolbox">
                         <li>
                             <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                        </li>
-                        <li class="dropdown">
+                        </li>-->
+                    @*     <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" href="#">Settings 1</a>
                                 <a class="dropdown-item" href="#">Settings 2</a>
                             </div>
-                        </li>
-                        <li>
+                        </li>*@
+                    <!--<li>
                             <a class="close-link"><i class="fa fa-close"></i></a>
                         </li>
-                    </ul>
+                    </ul>-->
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
@@ -80,18 +80,18 @@
                         <div class="profile_img">
                             <div id="crop-avatar">
                                 <!-- Current avatar -->
-                                <img class="img-responsive avatar-view" src="../gentelella-master/production/images/picture.jpg" alt="Avatar" title="Change the avatar">
+                                <img class="img-responsive avatar-view" height="220" width="220" src="../images/@Html.DisplayFor(model => model.photo)" alt="Avatar" title="Change the avatar">
                             </div>
                         </div>
-                        <h3>Samuel Doe</h3>
+                        <h3>@Html.DisplayFor(model => model.firstName) @Html.DisplayFor(model => model.lastName)</h3>
 
                         <ul class="list-unstyled user_data">
                             <li>
-                                <i class="fa fa-map-marker user-profile-icon"></i> San Francisco, California, USA
+                                <i class="fa fa-map-marker user-profile-icon"></i> @Html.DisplayFor(model => model.city), @Html.DisplayFor(model => model.region)
                             </li>
 
                             <li>
-                                <i class="fa fa-briefcase user-profile-icon"></i> Software Engineer
+                                <i class="fa fa-briefcase user-profile-icon"></i>@Html.DisplayFor(model => model.phoneNumber)
                             </li>
 
                             <li class="m-top-xs">

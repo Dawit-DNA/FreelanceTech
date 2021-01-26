@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FreelanceTech.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -22,6 +23,7 @@ namespace FreelanceTech.ViewModel
         public int englishProficiency { get; set; }
         public string firstName { get; set; }
         public string lastName { get; set; }
+        public Wallet wallet { get; set; }
 
 
 

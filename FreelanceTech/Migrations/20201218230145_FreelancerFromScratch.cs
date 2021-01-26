@@ -206,7 +206,7 @@ namespace FreelanceTech.Migrations
                     level = table.Column<string>(nullable: true),
                     Payment_Amount = table.Column<double>(nullable: false),
                     customerId = table.Column<string>(nullable: true),
-                    freelancerId = table.Column<string>(nullable: false),
+                    freelancerId = table.Column<string>(nullable: true),
                     contractId = table.Column<int>(nullable: false),
                     businessAnalystId = table.Column<string>(nullable: true),
                     comment = table.Column<string>(nullable: true),

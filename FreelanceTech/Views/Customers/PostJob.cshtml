@@ -1,12 +1,10 @@
 ﻿@{
-    Layout = "DashboardLayout";
+    Layout = "_CustomerDashboardLayout";
     @model Job;
 }
 
-<body class="nav-md">
+<div class="nav-md">
     <div class="container body">
-
-
         <!-- page content -->
         <div class="right_col " role="main">
             <div class="">
@@ -56,7 +54,7 @@
                                                 </a>
                                             </li>
                                         </ul>
-                                        <form enctype="multipart/form-data" id="mainForm" class="form-horizontal form-label-left" asp-controller="Customer" asp-action="PostJob" method="post">
+                                        <form enctype="multipart/form-data" id="mainForm" class="form-horizontal form-label-left" asp-controller="Customers" asp-action="PostJob" method="post">
                                             <div id="step-1">
                                                 <div class="form-group row">
                                                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">
@@ -169,20 +167,26 @@
                                                 <h2 class="StepTitle">Step 2 Content</h2>
                                                 <label class="control-label col-md-3 col-sm-3 ">Category</label>
                                                 <div class="col-md-9 col-sm-9 ">
-                                                    <select asp-for="category" class="form-control category" id="category">
-                                                        <option value="none" selected="selected">Choose option</option>
-                                                        <option value="Web Development">Web Development</option>
-                                                        <option value="Mobile Development">Mobile Development</option>
-                                                        <option value="Windows App Development">Windows App Development</option>
-                                                        <option value="Graphics Designer">Graphics Designer</option>
+                                                    <select asp-for="category" onchange="fun()" class="form-control category" id="category">
+                                                        <option value="none" onchange="fun()" selected="selected">Choose option</option>
+                                                        <option value="Web Development" onchange="fun()">Web Development</option>
+                                                        <option value="Mobile Development" onchange="fun()">Mobile Development</option>
+                                                        <option value="Windows App Development" onchange="fun()">Windows App Development</option>
+                                                        <option value="Graphics Designer" onchange="fun()">Graphics Designer</option>
                                                     </select>
                                                 </div>
                                                 <div>
                                                     <label class="control-label col-md-3 col-sm-3 ">Skills</label>
                                                     <div class="col-md-9 col-sm-9 ">
-                                                        <select class="select2_multiple form-control skills" id="skills" multiple="multiple">
+                                                        <select class="select2_multiple form-control skills" id="skills"asp-for="JobSkill" multiple="multiple">
                                                         </select>
                                                         <div id="suggestions-container" style="position: relative; float: left; width: 250px; margin: 10px;"></div>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <label class="control-label col-md-3 col-sm-3 "asp-for="questions">Questions: </label>
+                                                    <div class="col-md-9 col-sm-9">
+                                                        <textarea class="form-control" rows="8" asp-for="questions"></textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -271,4 +275,61 @@
 
     </div>
 
-</body>
+</div>
+<script>
+    function fun() {
+        let value = $("#category option:selected").val();
+        switch (value) {
+            case "Web Development": {
+                $('select.skills').children().remove();
+                $('#skills').append(`<option value="FullStack">Full Stack Web Developer</option>`);
+                $('#skills').append(`<option value="FRND">Front End Developer</option>`);
+                $('#skills').append(`<option value="WP">CMS Development</option>`);
+                $('#skills').append(`<option value="BED">Back End Developer</option>`);
+                $('#skills').append(`<option value="dotnetcore">.NET Core</option>`);
+                $('#skills').append(`<option value="njs">Nodejs</option>`);
+                $('#skills').append(`<option value="APID">API Development</option>`);
+                $('#skills').append(`<option value="APII">API Integration</option>`);
+                $('#skills').append(`<option value="Vj">VueJs</option>`);
+                $('#skills').append(`<option value="Dj">Django</option>`);
+                $('#skills').append(`<option value="React">React</option>`);
+                $('#skills').append(`<option value="Angular">AngularJs</option>`);
+                break;
+            }
+            case "Mobile Development": {
+                $('select.skills').children().remove();
+                $('#skills').append(`<option value="swift">iOS Development(swift)</option>`);
+                $('#skills').append(`<option value="Java">Android Development(Java)</option>`);
+                $('#skills').append(`<option value="Java">Android Development(Kotlin)</option>`);
+                $('#skills').append(`<option value="flutter">Flutter</option>`);
+                $('#skills').append(`<option value="ionic">Ionic</option>`);
+                $('#skills').append(`<option value="ReactN">React Native</option>`);
+                $('#skills').append(`<option value="xamarin">Xamarin</option>`);
+                $('#skills').append(`<option value="apache">Apache Cordova</option>`);
+                break;
+            }
+            case "Windows App Development": {
+                $('select.skills').children().remove();
+                $('#skills').append(`<option value="WPF">WPF</option>`);
+                $('#skills').append(`<option value="C">C++</option>`);
+                $('#skills').append(`<option value="WPF">UWP</option>`);
+                $('#skills').append(`<option value="WF">WinForms</option>`);
+                break;
+            }
+            case "Graphics Designer": {
+                $('select.skills').children().remove();
+                $('#skills').append(`<option value="logo">Logo Designer</option>`);
+                $('#skills').append(`<option value="VDE">Video Editing</option>`);
+                $('#skills').append(`<option value="ADP">Adobe Photoshop</option>`);
+                $('#skills').append(`<option value="ADI">Adobe Illustrator</option>`);
+                $('#skills').append(`<option value="3D">3D Design</option>`);
+                $('#skills').append(`<option value="3DM">3D Modelling</option>`);
+                $('#skills').append(`<option value="ADCS">Adobe Creative Suit</option>`);
+                break;
+            }
+
+            default:
+                break;
+        }
+    }
+</script>

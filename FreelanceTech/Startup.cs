@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
@@ -13,8 +12,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using FreelanceTech.Models;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Westwind.AspNetCore.LiveReload;
+using Castle.Core;
 
 namespace FreelanceTech
 {
@@ -33,14 +32,14 @@ namespace FreelanceTech
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddIdentityCore<User>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddRoles<IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
-            services.AddTransient<IEmailSender, EmailSender>();
+            services.AddTransient<EmailSender, EmailSender>();
             services.Configure<AuthMessageSenderOptions>(Configuration);
-            services.AddScoped<IProposalRepository, SqlProposalRepository>();
-            services.AddScoped<IWalletRepository, SqlWalletRepository>();
-            services.AddScoped<IJobRepository, SqlJobRepository>();
+            services.AddTransient<IProposalRepository, SqlProposalRepository>();
+            services.AddTransient<IWalletRepository, SqlWalletRepository>();
+            services.AddTransient<IJobRepository, SqlJobRepository>();
             services.AddRazorPages();
        
         }

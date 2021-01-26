@@ -7,7 +7,7 @@ namespace FreelanceTech.Models
 {
     public interface IWalletRepository
     {
-        bool Deposit(Wallet wallet);
-        Wallet Balance(int Id);
+        public bool Deposit(Wallet wallet);
+        Wallet Balance(string Id);
     }
 }

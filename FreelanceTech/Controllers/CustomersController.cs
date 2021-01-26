@@ -19,7 +19,7 @@ namespace FreelanceTech.Controllers
 {
     public class CustomersController : Controller
     {
-        string currentUser = RegisterModel.registeredUser;
+        string currentUser;
         private IJobRepository jobRepository;
         private ApplicationDbContext _context;
         private IWebHostEnvironment _hostingEnvironment;
@@ -27,17 +27,17 @@ namespace FreelanceTech.Controllers
         private CheckoutOptions checkoutoptions;
         private string pdtToken = "APnMhGcBqU8Nfw";
         private ILogger<HomeController> _logger;
-        public Wallet _wallet;
 
         public CustomersController(ApplicationDbContext context, IWebHostEnvironment hostingEnvironment, IJobRepository jobRepository = null, ILogger<HomeController> logger = null, IProposalRepository proposalRepository = null, IWalletRepository walletRepository = null)
         {
+            currentUser = RegisterModel.registeredUser;
             this.walletRepository = walletRepository;
             _logger = logger;
             this.jobRepository = jobRepository;
             _context = context;
             _hostingEnvironment = hostingEnvironment;
             string sellerCode = "0778";
-            string successUrlReturn = "https://localhost:44346/Freelancer/Deposittowallet"; //"YOUR_SUCCESS_URL";
+            string successUrlReturn = "https://localhost:44346/Customers/Success"; //"YOUR_SUCCESS_URL";
             string ipnUrlReturn = "https://localhost:44346/Freelancer/IPNDestination"; //"YOUR_IPN_URL";
             string cancelUrlReturn = "https://localhost:44346/Freelancer/PaymentCancelReturnUrl"; //"YOUR_CANCEL_URL";
             string failureUrlReturn = ""; //"YOUR_FAILURE_URL";
@@ -48,16 +48,21 @@ namespace FreelanceTech.Controllers
         // GET: Customers
         public async Task<IActionResult> Index()
         {
+
             string userId = User.GetUserId();
+            var customer = await _context.Customer
+                  .FirstOrDefaultAsync(m => m.customerId == userId);
+            var address = await _context.Address
+                 .FirstOrDefaultAsync(m => m.userId == userId);
             var user = await _context.Users
-             .FirstOrDefaultAsync(m => m.Id == userId);
-            var cutomer = await _context.Customer
-             .FirstOrDefaultAsync(m => m.customerId == userId);
-
+                             .FirstOrDefaultAsync(m => m.Id == userId);
             CustomerViewModel model = new CustomerViewModel();
-
+            model.customerId = customer.customerId;
+            model.phoneNumber = customer.phoneNumber;
             model.lastName = user.lastName;
             model.firstName = user.firstName;
+
+            model.photo = customer.photo;
 
             return View(model);
         }
@@ -124,7 +129,10 @@ namespace FreelanceTech.Controllers
                 address.houseNumber = Convert.ToInt32(viewmodel.houseNumber.ToString());
                 address.pobox = Convert.ToInt32(viewmodel.pobox.ToString());
                 address.userId = currentUser;
-
+                Wallet wall = new Wallet();
+                wall.userId = userId;
+                wall.balance = 0;
+                walletRepository.Deposit(wall);
 
                 _context.Add(customer);
                 await _context.SaveChangesAsync();
@@ -263,42 +271,52 @@ namespace FreelanceTech.Controllers
 
 
         [HttpGet]
-        public IActionResult DepositToWallet()
+        public IActionResult Success()
         {
             return View();
         }
         [HttpPost]
-        public IActionResult DepositToWallet(Wallet wallet)
+        public async Task<IActionResult> SuccessAsync(Wallet wallet)
         {
             if (ModelState.IsValid)
             {
-                //CheckoutExpress(wallet);
-                walletRepository.Deposit(wallet);
-                return View();
+                string referer = Request.Headers["Referer"].ToString();
+                string refer = referer.Substring(54, 2);
+                double amount = Convert.ToDouble(refer);
+                //wallet.balance = Double.Parse(Request.["TotalAmount"]);
+                Wallet newWallet = new Wallet();
+                newWallet.userId = RegisterModel.registeredUser;
+                newWallet.balance = amount;
+                //_context.Wallet.Update(newWallet);
+                //await _context.SaveChangesAsync();
+                //return RedirectToAction("Index", "Wallets");
+                if(walletRepository.Deposit(newWallet) == true)
+                {
+                    return RedirectToAction("Index", "Wallets");
+                }
+                return RedirectToAction("Index", "Error");
+                
             }
-            return View();
+            return RedirectToAction("Index", "Wallets");
         }
         [HttpPost]
-        public void CheckoutExpress(Wallet wallet)
+        public void CheckoutExpress(CustomerViewModel customer)
         {
-            Random random = new Random();
-            int num = random.Next(1, 30000);
-            _wallet = new Wallet();
-            _wallet.userId = num.ToString();
-            _wallet.balance = Double.Parse(Request.Form["balance"]);
+            customer.wallet.userId = RegisterModel.registeredUser;
+            //_wallet.balance = Double.Parse(Request.Form["balance"]);
             checkoutoptions.Process = CheckoutType.Express;
             Random rnd = new Random();
             int Id = rnd.Next(1, 10000);
             var itemId = Convert.ToString(Id);
             var itemName = "Deposit To Freelance Tech Wallet";
-            var unitPrice = decimal.Parse(Request.Form["balance"]);
+            var unitPrice = Convert.ToDecimal(customer.wallet.balance);
 
             CheckoutItem checkoutitem = new CheckoutItem(itemId, itemName, unitPrice, 1, null, null, null, null, null);
             checkoutoptions.OrderId = null; //"YOUR_UNIQUE_ID_FOR_THIS_ORDER";  //can also be set null
             checkoutoptions.ExpiresAfter = 2880; //"NUMBER_OF_MINUTES_BEFORE_THE_ORDER_EXPIRES"; //setting null means it never expires
             var url = CheckoutHelper.GetCheckoutUrl(checkoutoptions, checkoutitem);
             Response.Redirect(url);
-            RedirectToAction("DepositToWallet", _wallet);
+            RedirectToAction("DepositToWallet", customer.wallet);
         }
         [HttpPost]
         public async Task<string> IPNDestination(IPNModel ipnModel)
@@ -339,7 +357,8 @@ namespace FreelanceTech.Controllers
                 //1. the TransactionId is not valid
                 //2. the PDT_Key is incorrect
             }
-            return RedirectToAction("DepositToWallet", _wallet);
+            //return RedirectToAction("DepositToWallet", _wallet);
+            return null;
         }
 
         public async Task<string> PaymentCancelReturnUrl(IPNModel ipnModel)

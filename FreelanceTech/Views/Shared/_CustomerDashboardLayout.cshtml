@@ -60,7 +60,7 @@
                     <!-- menu profile quick info -->
                     <div class="profile clearfix">
                         <div class="profile_pic">
-                            <img src=@Html.DisplayFor(model => model.photo) alt="..." class="img-circle profile_img">
+                            <img src="../images/@Html.DisplayFor(model => model.photo)" alt="..." class="img-circle profile_img">
                         </div>
                         <div class="profile_info">
                             <span>Welcome,</span>
@@ -78,7 +78,7 @@
                             <h3>General</h3>
                             <ul class="nav side-menu">
                                 <li>
-                                    <a href="../Freelancers/Index"><i class="fa fa-desktop"></i> Dashboard</a>
+                                    <a href="../Customers/Index"><i class="fa fa-desktop"></i> Dashboard</a>
 
                                 </li>
                                 <li>
@@ -90,11 +90,11 @@
 
                                 </li>
                                 <li>
-                                    <a href="../Freelancer/Messages"><i class="fa fa-table"></i> Messages </a>
+                                    <a href="../Customers/Messages"><i class="fa fa-table"></i> Messages </a>
 
                                 </li>
                                 <li>
-                                    <a href="../Freelancer/Messages"><i class="fa fa-bar-chart-o"></i> Ongoing Project </a>
+                                    <a href="../Customers/Projects"><i class="fa fa-bar-chart-o"></i> Ongoing Project </a>
 
                                 </li>
 
@@ -165,7 +165,7 @@
                             <a data-toggle="tooltip" data-placement="top" title="Lock">
                                 <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
                             </a>*@
-                        <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+                        <a data-toggle="tooltip" data-placement="top" title="Logout" asp-controller="Home" asp-action="Index">
                             <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
                         </a>
                     </div>
@@ -183,7 +183,7 @@
                         <ul class=" navbar-right">
                             <li class="nav-item dropdown open" style="padding-left: 15px;">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                                    <img src=@Html.DisplayFor(model => model.photo) alt=""> @Html.DisplayFor(model => model.firstName) @Html.DisplayFor(model => model.lastName))
+                                    <img src="../images/@Html.DisplayFor(model => model.photo)" alt=""> @Html.DisplayFor(model => model.firstName) @Html.DisplayFor(model => model.lastName)
                                 </a>
                                 <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="javascript:;"> Profile</a>
@@ -294,10 +294,6 @@
 
     <!-- Custom Theme Scripts -->
     <script src="../gentelella-master/build/js/custom.min.js"></script>
-    <!-- jQuery -->
-    <script src="~/gentelella-master/vendors/jquery/dist/jquery.min.js"></script>
-    <!-- Bootstrap -->
-    <script src="~/gentelella-master/vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <!-- FastClick -->
     <script src="~/gentelella-master/vendors/fastclick/lib/fastclick.js"></script>
     <!-- NProgress -->

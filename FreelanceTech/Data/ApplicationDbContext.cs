@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using FreelanceTech.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -23,6 +24,12 @@ namespace FreelanceTech.Data
         public DbSet<Chat> Chat { get; set; }
         public DbSet<Contract> Contract { get; set; }
         public DbSet<Experience> Experience { get; set; }
+
+        internal Task Addasync(Wallet wallet)
+        {
+            throw new NotImplementedException();
+        }
+
         public DbSet<Expertise> Expertise { get; set; }
         public DbSet<Language> Language { get; set; }
         public DbSet<Transaction> Transaction { get; set; }
