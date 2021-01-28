@@ -1,0 +1,159 @@
+﻿@model FreelanceTech.ViewModel.UserViewModel;
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "_CustomerDashboardLayout";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Contact Form | Gentelella Alela! by Colorlib</title>
+
+    <!-- Bootstrap -->
+    <link href="../gentelella-master/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="../gentelella-master/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="../gentelella-master/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="../gentelella-master/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link href="../gentelella-master/build/css/custom.min.css" rel="stylesheet">
+</head>
+
+<body class="nav-md">
+    <div class="container body">
+        <div class="main_container">
+            <!-- page content -->
+            <div class="right_col">
+                <div class="">
+                    <div class="clearfix"></div>
+
+                    <div class="row">
+                        <div class="x_panel">
+                            <div class="x_content">
+                                <div class="title_left">
+                                    <h3>Contacts Design</h3>
+                                </div>
+                                <div class="title_right">
+                                    <form class="form-control" asp-action="SearchFreelancers" asp-controller="Customers" method="post">
+                                        <div class="col-md-5 col-sm-5  form-group pull-right top_search">
+                                            <div class="input-group">
+
+                                                <input type="text" name="keyword" class="form-control" placeholder="Search for...">
+                                                <span class="input-group-btn">
+                                                    <button class="btn btn-default" type="submit">Go!</button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </form>
+                                        
+                                    </div>
+                                </div>
+                                <br/>
+                                <br/>
+                                <div class="clearfix"></div>
+
+                                <div class="col-md-4 col-sm-4  profile_details">
+                                    <div class="well profile_view">
+                                        @{
+                                            foreach (var freelancer in Model.freelancers)
+                                            {
+                                                <div class="well profile_view">
+                                                    <div class="col-sm-12">
+                                                        @*<h4 class="brief"><i>Digital Strategist</i></h4>*@
+                                                        <div class="left col-md-7 col-sm-7">
+                                                            <h2> @freelancer.firstName @freelancer.lastName </h2>
+                                                            <p><strong>Title: </strong>@freelancer.title</p>
+                                                            <ul class="list-unstyled">
+                                                                <li><i class="fa fa-building"></i> Address: @freelancer.city</li>
+                                                                <li><i class="fa fa-phone"></i> Phone #: @freelancer.phoneNumber</li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="right col-md-5 col-sm-5 text-center">
+                                                            <img src="../images/@freelancer.photo" alt="" class="img-circle img-fluid">
+                                                        </div>
+                                                    </div>
+                                                    <div class=" profile-bottom text-center">
+                                                        <div class=" col-sm-6 emphasis">
+                                                            @{
+                                                                for (int i = 1; i <= 5; i++)
+                                                                {
+                                                                    if (freelancer.rate == 0)
+                                                                    {
+                                                                        <p class="ratings">
+                                                                            <a>0</a>
+                                                                            <a href="#"><span class="fa fa-star-o"></span></a>
+                                                                            <a href="#"><span class="fa fa-star-o"></span></a>
+                                                                            <a href="#"><span class="fa fa-star-o"></span></a>
+                                                                            <a href="#"><span class="fa fa-star-o"></span></a>
+                                                                            <a href="#"><span class="fa fa-star-o"></span></a>
+                                                                        </p>
+                                                                        break;
+                                                                    }
+                                                                    <p class="ratings">
+                                                                        <a>@freelancer.rate</a>
+                                                                        @{
+                                                                            if (i <= freelancer.rate)
+                                                                            {
+                                                                                <a><span class="fa fa-star"></span></a>
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <a><span class="fa fa-star-o"></span></a>
+                                                                            }
+                                                                        }
+                                                                    </p>
+                                                                }
+                                                            }
+
+                                                        </div>
+                                                        <div class=" col-sm-6 emphasis">
+                                                            <button type="button" class="btn btn-success btn-sm">
+                                                                <i class="fa fa-user">
+                                                                </i> <i class="fa fa-comment"></i>
+                                                            </button>
+                                                            <button type="button" class="btn btn-primary btn-sm">
+                                                                <i class="fa fa-user"> </i> View Profile
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            }
+                                        }
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /page content -->
+        </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="../gentelella-master/vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="../gentelella-master/vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- FastClick -->
+    <script src="../gentelella-master/vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="../gentelella-master/vendors/nprogress/nprogress.js"></script>
+    <!-- ECharts -->
+    <script src="../gentelella-master/vendors/echarts/dist/echarts.min.js"></script>
+
+    <!-- Custom Theme Scripts -->
+    <script src="../gentelella-master/build/js/custom.min.js"></script>
+</body>
+</html>

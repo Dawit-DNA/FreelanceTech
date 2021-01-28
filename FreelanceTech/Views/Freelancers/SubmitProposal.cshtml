@@ -1,6 +1,6 @@
 ﻿@{ 
     Layout = "DashboardLayout";
-    @model Proposal;
+    @model FreelanceTech.ViewModel.UserViewModel;
 }
     @*<div style="background-color: white;">
         <form asp-controller="Freelancers" asp-action="SubmitProposal" method="post" class="mt-3">
@@ -24,32 +24,33 @@
         <form id="demo-form2" asp-controller="Freelancers" asp-action="SubmitProposal" method="post" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
 
             <div class="item form-group">
-                <label class="col-form-label col-md-3 col-sm-3 label-align" asp-for="bidAmount">
+                <label class="col-form-label col-md-3 col-sm-3 label-align" asp-for="@Model.proposal.bidAmount">
                     Payment Amount: <span class="required">*</span>
                 </label>
                 <div class="col-md-6 col-sm-6 ">
-                    <input type="text" id="first-name" required="required" class="form-control" asp-for="bidAmount">
+                    <input type="text" id="first-name" required="required" class="form-control" asp-for="@Model.proposal.bidAmount">
                 </div>
             </div>
             <div class="item form-group">
-                <label class="col-form-label col-md-3 col-sm-3 label-align" asp-for="answers">
+                <label class="col-form-label col-md-3 col-sm-3 label-align" asp-for="@Model.proposal.answers">
                     Answers: 
                 </label>
                 <div class="col-md-6 col-sm-6 ">
-                    <textarea asp-for="answers" class="form-control" rows="9">
+                    <textarea asp-for="@Model.proposal.answers" class="form-control" rows="9">
                         Enter Answers to Job Questions Here
                     </textarea>
                 </div>
             </div>
             <div class="item form-group">
-                <label asp-for="description" class="col-form-label col-md-3 col-sm-3 label-align">Description</label>
+                <label asp-for="@Model.proposal.description" class="col-form-label col-md-3 col-sm-3 label-align">Description</label>
                 <div class="col-md-6 col-sm-6 ">
-                    <textarea asp-for="description" rows="9" class="form-control"></textarea>
+                    <textarea asp-for="@Model.proposal.description" rows="9" class="form-control"></textarea>
                 </div>
             </div>
             <div class="ln_solid"></div>
             <div class="item form-group">
                 <div class="col-md-6 col-sm-6 offset-md-3">
+                    <input style="display: none;" type="text" name="jobId" value="@Model.job.jobId" />
                     <button type="submit" class="btn btn-success">Submit</button>
                 </div>
             </div>

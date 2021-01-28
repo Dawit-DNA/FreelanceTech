@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Shared.Web.MvcExtensions;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -48,7 +49,7 @@ namespace FreelanceTech.Controllers
         // GET: Customers
         public async Task<IActionResult> Index()
         {
-
+            UserViewModel userViewModel = new UserViewModel();
             string userId = User.GetUserId();
             var customer = await _context.Customer
                   .FirstOrDefaultAsync(m => m.customerId == userId);
@@ -56,6 +57,37 @@ namespace FreelanceTech.Controllers
                  .FirstOrDefaultAsync(m => m.userId == userId);
             var user = await _context.Users
                              .FirstOrDefaultAsync(m => m.Id == userId);
+            var job = _context.Job.Where(m => m.customerId == userId);
+            FreelancerViewModel freelancer = new FreelancerViewModel();
+            List<ProposalViewModel> proposals = new List<ProposalViewModel>();
+            ProposalViewModel proposal = new ProposalViewModel();
+            foreach (var item in job)
+            {
+                var prop = _context.Proposal.Where(m => m.jobId == item.jobId);
+                if (prop != null)
+                {
+
+                    foreach (var i in prop)
+                    {
+                        var userr = _context.Users.FirstOrDefault(m => m.Id == i.freelancerId);
+                        var freelancer1 = _context.Freelancer.FirstOrDefault(m => m.freelancerId == i.freelancerId);
+                        freelancer.freelancerId = item.freelancerId;
+                        freelancer.firstName = userr.firstName;
+                        freelancer.lastName = userr.lastName;
+                        freelancer.email = userr.Email;
+                        freelancer.phoneNumber = freelancer1.phoneNumber;
+                        freelancer.title = freelancer.category;
+                        proposal.freelancer = freelancer;
+                        proposal.job = item;
+                        proposal.freelancerId = item.freelancerId;
+                        proposal.bidAmount = i.bidAmount;
+                        proposal.description = i.description;
+                        proposal.answers = i.answers;
+                        proposals.Add(proposal);
+                    }
+
+                }
+            }
             CustomerViewModel model = new CustomerViewModel();
             model.customerId = customer.customerId;
             model.phoneNumber = customer.phoneNumber;
@@ -64,25 +96,22 @@ namespace FreelanceTech.Controllers
 
             model.photo = customer.photo;
 
-            return View(model);
+            userViewModel.customerViewModel = model;
+            userViewModel.jobs = _context.Job.Where(e => e.customerId.Contains(userId)).ToList();
+            userViewModel.proposals = proposals;
+            return View(userViewModel);
         }
 
-        // GET: Customers/Details/5
-        public async Task<IActionResult> Details(string id)
+        [HttpPost]
+        public IActionResult AcceptBid()
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var customer = await _context.Customer
-                .FirstOrDefaultAsync(m => m.customerId == id);
-            if (customer == null)
-            {
-                return NotFound();
-            }
-
-            return View(customer);
+            string jobId = Request.Form["jobId"];
+            string freelancerId = Request.Form["freelancerId"];
+            var job = _context.Job.FirstOrDefault(m => m.jobId == jobId);
+            job.status = "OnGoing";
+            job.freelancerId = freelancerId;
+            _context.Job.Update(job);
+            return RedirectToAction("Index", "Customer");
         }
 
         // GET: Customers/Create
@@ -144,7 +173,7 @@ namespace FreelanceTech.Controllers
            
 
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index","Home");
             }
             return View(viewmodel);
         }
@@ -167,19 +196,51 @@ namespace FreelanceTech.Controllers
         }
 
         [HttpGet]
-        public IActionResult PostJob()
+        public async Task<IActionResult> PostJob()
         {
-            return View();
+            string userId = RegisterModel.registeredUser;
+            var customer = await _context.Customer
+                  .FirstOrDefaultAsync(m => m.customerId == userId);
+            var address = await _context.Address
+                 .FirstOrDefaultAsync(m => m.userId == userId);
+            var user = await _context.Users
+                             .FirstOrDefaultAsync(m => m.Id == userId);
+            CustomerViewModel model = new CustomerViewModel();
+            model.customerId = customer.customerId;
+            model.phoneNumber = customer.phoneNumber;
+            model.lastName = user.lastName;
+            model.firstName = user.firstName;
+
+            model.photo = customer.photo;
+            UserViewModel userViewModel = new UserViewModel() { customerViewModel = model };
+            return View(userViewModel);
         }
         [HttpPost]
-        public IActionResult PostJob(Job job)
+        public async Task<IActionResult> PostJob(Job job)
         {
             if (ModelState.IsValid)
             {
+                string userId = RegisterModel.registeredUser;
                 Random rnd = new Random();
                 job.jobId = rnd.Next(1000, 1000000).ToString();
+                job.status = "Not Started";
+                job.customerId = userId;
                 jobRepository.PostJob(job);
-                return View();
+                var customer = await _context.Customer
+                      .FirstOrDefaultAsync(m => m.customerId == userId);
+                var address = await _context.Address
+                     .FirstOrDefaultAsync(m => m.userId == userId);
+                var user = await _context.Users
+                                 .FirstOrDefaultAsync(m => m.Id == userId);
+                CustomerViewModel model = new CustomerViewModel();
+                model.customerId = customer.customerId;
+                model.phoneNumber = customer.phoneNumber;
+                model.lastName = user.lastName;
+                model.firstName = user.firstName;
+
+                model.photo = customer.photo;
+                UserViewModel userViewModel = new UserViewModel() { customerViewModel = model };
+                RedirectToAction("Index","Customer",userViewModel);
             }
             return View();
         }
@@ -276,12 +337,12 @@ namespace FreelanceTech.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> SuccessAsync(Wallet wallet)
+        public IActionResult SuccessAsync(Wallet wallet)
         {
             if (ModelState.IsValid)
             {
                 string referer = Request.Headers["Referer"].ToString();
-                string refer = referer.Substring(54, 2);
+                string refer = referer.Substring(54, 3);
                 double amount = Convert.ToDouble(refer);
                 //wallet.balance = Double.Parse(Request.["TotalAmount"]);
                 Wallet newWallet = new Wallet();
@@ -302,8 +363,10 @@ namespace FreelanceTech.Controllers
         [HttpPost]
         public void CheckoutExpress(CustomerViewModel customer)
         {
+            //CustomerViewModel customer = new CustomerViewModel();
+            customer.wallet = new Wallet();
             customer.wallet.userId = RegisterModel.registeredUser;
-            //_wallet.balance = Double.Parse(Request.Form["balance"]);
+            customer.wallet.balance = Double.Parse(Request.Form["balance"]);
             checkoutoptions.Process = CheckoutType.Express;
             Random rnd = new Random();
             int Id = rnd.Next(1, 10000);
@@ -318,6 +381,109 @@ namespace FreelanceTech.Controllers
             Response.Redirect(url);
             RedirectToAction("DepositToWallet", customer.wallet);
         }
+        [HttpGet]
+        public async Task<IActionResult> SearchFreelancers()
+        {
+            string userId = RegisterModel.registeredUser;
+            var customer = await _context.Customer
+                  .FirstOrDefaultAsync(m => m.customerId == userId);
+            var address = await _context.Address
+                 .FirstOrDefaultAsync(m => m.userId == userId);
+            var user = await _context.Users
+                             .FirstOrDefaultAsync(m => m.Id == userId);
+            CustomerViewModel model = new CustomerViewModel();
+            model.customerId = customer.customerId;
+            model.phoneNumber = customer.phoneNumber;
+            model.lastName = user.lastName;
+            model.firstName = user.firstName;
+
+            model.photo = customer.photo;
+            UserViewModel userViewModel = new UserViewModel() { customerViewModel = model };
+            var freelancers =  _context.Freelancer
+                .FromSqlRaw<Freelancer>("SELECT * FROM Freelancer")
+                .ToList();
+            
+              List<FreelancerViewModel> freelancerViewModels = new List<FreelancerViewModel>();
+            foreach (var userr in freelancers)
+            {
+                FreelancerViewModel freelancer = new FreelancerViewModel();
+                var users = _context.Users.Where(e => e.Id.Contains(userr.freelancerId)).FirstOrDefault();
+                var addresses = _context.Address.Where(e => e.userId.Contains(userr.freelancerId)).FirstOrDefault();
+                freelancer.freelancerId = users.Id;
+                freelancer.firstName = users.firstName;
+                freelancer.lastName = users.lastName;
+                freelancer.email = users.Email;
+                freelancer.phoneNumber = userr.phoneNumber;
+                freelancer.englishProficiency = userr.englishProficiency;
+                freelancer.rate = userr.rate;
+                freelancer.education = userr.education;
+                freelancer.photo = userr.photo;
+                freelancer.city = addresses.city;
+                freelancer.pobox = addresses.pobox;
+                freelancerViewModels.Add(freelancer);
+                //freelancer = null;
+            }
+            userViewModel.freelancers = freelancerViewModels;
+            return View(userViewModel);
+        }
+        [HttpPost]
+        public async Task<IActionResult> SearchFreelancers(string keyword)
+        {
+            string userId = RegisterModel.registeredUser;
+            var customer = await _context.Customer
+                  .FirstOrDefaultAsync(m => m.customerId == userId);
+            var address = await _context.Address
+                 .FirstOrDefaultAsync(m => m.userId == userId);
+            var userss = await _context.Users
+                             .FirstOrDefaultAsync(m => m.Id == userId);
+            CustomerViewModel model = new CustomerViewModel();
+            model.customerId = customer.customerId;
+            model.phoneNumber = customer.phoneNumber;
+            model.lastName = userss.lastName;
+            model.firstName = userss.firstName;
+
+            model.photo = customer.photo;
+            UserViewModel userViewModel = new UserViewModel() { customerViewModel = model };
+            keyword = Request.Form["keyword"].ToString();
+            keyword = StringExtensions.FirstCharToUpper(keyword);
+            if (keyword != null)
+            {
+                List<FreelancerViewModel> freelancerViewModels = new List<FreelancerViewModel>();
+                FreelancerViewModel freelancer = new FreelancerViewModel();
+                var users = _context.Users.Where(e => e.firstName.Contains(keyword) ||
+                                e.lastName.Contains(keyword)).ToList();
+                List<Freelancer> freelancers = new List<Freelancer>();
+                List<Address> addresses = new List<Address>();
+                foreach(var user in users)
+                {
+                    freelancer.freelancerId = user.Id;
+                    freelancer.firstName = user.firstName;
+                    freelancer.lastName = user.lastName;
+                    freelancer.email = user.Email;
+                    freelancers.Add(_context.Freelancer.Where(e => e.freelancerId.Contains(user.Id)).FirstOrDefault());
+                    foreach (var item in freelancers)
+                    {
+                        freelancer.phoneNumber = item.phoneNumber;
+                        freelancer.englishProficiency = item.englishProficiency;
+                        freelancer.rate = item.rate;
+                        freelancer.education = item.education;
+                        freelancer.photo = item.photo;
+                    }
+                    addresses.Add(_context.Address.Where(e => e.userId.Contains(user.Id)).FirstOrDefault());
+                    foreach (var col in addresses)
+                    {
+                        freelancer.city = col.city;
+                        freelancer.pobox = col.pobox;
+                    }
+                    freelancerViewModels.Add(freelancer);
+                }
+                userViewModel.freelancers = freelancerViewModels;
+                return View(userViewModel);
+            }
+            return View(userViewModel);
+        }
+
+
         [HttpPost]
         public async Task<string> IPNDestination(IPNModel ipnModel)
         {

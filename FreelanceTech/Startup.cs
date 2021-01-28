@@ -14,6 +14,8 @@ using Microsoft.Extensions.Hosting;
 using FreelanceTech.Models;
 using Westwind.AspNetCore.LiveReload;
 using Castle.Core;
+using Microsoft.AspNetCore.Identity.UI;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace FreelanceTech
 {
@@ -32,10 +34,12 @@ namespace FreelanceTech
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddIdentityCore<User>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<FreelanceTech.Models.User>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddRoles<IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
+            //services.AddIdentityCore<FreelanceTech.Models.User>(options => options.SignIn.RequireConfirmedAccount = true)
+            //    .AddRoles<IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
-            services.AddTransient<EmailSender, EmailSender>();
+            services.AddTransient<IEmailSender, EmailSender>();
             services.Configure<AuthMessageSenderOptions>(Configuration);
             services.AddTransient<IProposalRepository, SqlProposalRepository>();
             services.AddTransient<IWalletRepository, SqlWalletRepository>();

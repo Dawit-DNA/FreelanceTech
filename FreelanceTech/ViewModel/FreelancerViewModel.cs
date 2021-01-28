@@ -18,6 +18,7 @@ namespace FreelanceTech.ViewModel
         public string photo { get; set; }
         public string legaID { get; set; }
         public string status { get; set; }
+        public string email { get; set; }
 
 
         public string region { get; set; }
@@ -43,9 +44,10 @@ namespace FreelanceTech.ViewModel
         public DateTime endDate { get; set; }
         public string description { get; set; }
 
-        public Constants.category category { get; set; }
-        public Constants.skill skill { get; set; }
-        public Constants.language language { get; set; }
-        public Constants.englishProficiency englishProficiency { get; set; }
+        public string category { get; set; }
+        public string skill { get; set; }
+        public string language { get; set; }
+        public int englishProficiency { get; set; }
+        public Wallet wallet;
     }
 }

@@ -6,10 +6,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity.UI;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace FreelanceTech
 {
-    public class EmailSender
+    public class EmailSender : IEmailSender 
     {
         public EmailSender(IOptions<AuthMessageSenderOptions> optionsAccessor)
         {

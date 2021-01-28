@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FreelanceTech.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<User, IdentityRole, string>
+    public class ApplicationDbContext : IdentityDbContext<FreelanceTech.Models.User, IdentityRole, string>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)

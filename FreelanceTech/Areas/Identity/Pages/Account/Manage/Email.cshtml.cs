@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace FreelanceTech.Areas.Identity.Pages.Account.Manage
 {
@@ -17,12 +18,12 @@ namespace FreelanceTech.Areas.Identity.Pages.Account.Manage
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
-        private readonly EmailSender _emailSender;
+        private readonly IEmailSender _emailSender;
 
         public EmailModel(
             UserManager<User> userManager,
             SignInManager<User> signInManager,
-            EmailSender emailSender)
+            IEmailSender emailSender)
         {
             _userManager = userManager;
             _signInManager = signInManager;

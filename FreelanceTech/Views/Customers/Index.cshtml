@@ -1,4 +1,4 @@
-﻿@model FreelanceTech.ViewModel.CustomerViewModel; 
+﻿@model FreelanceTech.ViewModel.UserViewModel; 
 
 @{
     ViewData["Title"] = "Index";
@@ -104,7 +104,10 @@
                                     </div>
                                     <div class="x_content">
                                         <div class="buttons center">
-                                            <button type="button" asp-action="PostJob" asp-controller="Customers" class="btn btn-success btn-lg">Creat Job</button>
+                                            <form asp-action="PostJob" asp-controller="Customers" method="get">
+                                                <button type="submit" class="btn btn-success btn-lg">Creat Job</button>
+                                            </form>
+
                                         </div>
                                     </div>
 
@@ -114,68 +117,159 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-md-6">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>REcent Job Posts</h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li>
+                                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="#">Settings 1</a>
+                                        <a class="dropdown-item" href="#">Settings 2</a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a class="close-link"><i class="fa fa-close"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            @{
+                                foreach (var job in Model.jobs)
+                                {
+                                    <ul class="list-unstyled msg_list">
+                                        <li>
+                                            <a>
+                                                <span>
+                                                    <span>@job.title</span>
+                                                    <span class="time">@job.postedDate</span>
+                                                </span>
+                                                <span class="message">
+                                                    @job.description
+                                                </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                }
+                            }
 
+                        </div>
+                    </div>
+                </div>
 
                 <div class=" col-md-10 col-sm-10">
 
-                    <h4>Propposed Offer</h4>
+                    <h4>Proposed Offer</h4>
 
                     <!-- end of user messages -->
                     <ul class="messages">
-                        <li>
-                            <img src="../gentelella-master/production/images/img.jpg" class="avatar" alt="Avatar">
-                            <div class="message_date">
-                                <h3 class="date text-info">24</h3>
-                                <p class="month">May</p>
-                            </div>
-                            <div class="message_wrapper">
-                                <h4 class="heading">Desmond Davison</h4>
-                                <blockquote class="message">Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua butcher retro keffiyeh dreamcatcher synth.</blockquote>
-                                <br />
-                                <p class="url">
-                                    <span class="fs1 text-info" aria-hidden="true" data-icon=""></span>
-                                    <a href="#"><i class="fa fa-paperclip"></i> User Acceptance Test.doc </a>
-                                </p>
-                            </div>
-                        </li>
-                        <li>
-                            <img src="../gentelella-master/production/images/img.jpg" class="avatar" alt="Avatar">
-                            <div class="message_date">
-                                <h3 class="date text-error">21</h3>
-                                <p class="month">May</p>
-                            </div>
-                            <div class="message_wrapper">
-                                <h4 class="heading">Brian Michaels</h4>
-                                <blockquote class="message">Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua butcher retro keffiyeh dreamcatcher synth.</blockquote>
-                                <br />
-                                <p class="url">
-                                    <span class="fs1" aria-hidden="true" data-icon=""></span>
-                                    <a href="#" data-original-title="">Download</a>
-                                </p>
-                            </div>
-                        </li>
-                        <li>
-                            <img src="../gentelella-master/production/images/img.jpg" class="avatar" alt="Avatar">
-                            <div class="message_date">
-                                <h3 class="date text-info">24</h3>
-                                <p class="month">May</p>
-                            </div>
-                            <div class="message_wrapper">
-                                <h4 class="heading">Desmond Davison</h4>
-                                <blockquote class="message">Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua butcher retro keffiyeh dreamcatcher synth.</blockquote>
-                                <br />
-                                <p class="url">
-                                    <span class="fs1 text-info" aria-hidden="true" data-icon=""></span>
-                                    <a href="#"><i class="fa fa-paperclip"></i> User Acceptance Test.doc </a>
-                                </p>
-                            </div>
-                        </li>
+                        @{ 
+                            foreach (var item in Model.proposals)
+                            {
+                                                <li>
+                                                    <div class="message_date">
+                                                        <p class="month">@item.job.postedDate</p>
+                                                    </div>
+                                                    <div class="message_wrapper">
+                                                        <a href="#myModal" data-toggle="modal"> <h4 class="heading">For Job -> @item.job.title</h4></a>
+                                                        <blockquote class="message">@item.description</blockquote>
+                                                        <br />
+                                                    </div>
+                                                    <div id="myModal" class="modal fade">
+                                                        <!-- Modal HTML -->
+                                                        <div>
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="container emp-profile">
+                                                                        <form asp-action="AcceptBid" asp-controller="Customer" method="post">
+                                                                            <div class="row">
+                                                                                <div class="col-md-4">
+                                                                                </div>
+                                                                                <div class="col-md-6">
+                                                                                    <div class="profile-head">
+                                                                                        <h5>
+                                                                                           Job -> @item.job.title
+                                                                                        </h5>
+                                                                                        <h6>
+                                                                                            Bid Amount - > @item.bidAmount
+                                                                                        </h6>
+                                                                                        <h6>
+                                                                                            Answers To Questions:
+                                                                                        </h6>
+                                                                                        <p class="proile-rating">@item.answers</p>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <h6>Freelancer Info</h6>
+                                                                            <div class="row">
+                                                                                <div class="col-md-8">
+                                                                                    <div class="tab-content profile-tab" id="myTabContent">
+                                                                                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                                                                            <div class="row">
+                                                                                                <div class="col-md-6">
+                                                                                                    <label>Name</label>
+                                                                                                </div>
+                                                                                                <div class="col-md-6">
+                                                                                                    <p>@item.freelancer.firstName @item.freelancer.lastName</p>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="row">
+                                                                                                <div class="col-md-6">
+                                                                                                    <label>Email</label>
+                                                                                                </div>
+                                                                                                <div class="col-md-6">
+                                                                                                    <p>@item.freelancer.email</p>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="row">
+                                                                                                <div class="col-md-6">
+                                                                                                    <label>Phone</label>
+                                                                                                </div>
+                                                                                                <div class="col-md-6">
+                                                                                                    <p>@item.freelancer.phoneNumber</p>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="row">
+                                                                                                <div class="col-md-6">
+                                                                                                    <label>Profession</label>
+                                                                                                </div>
+                                                                                                <div class="col-md-6">
+                                                                                                    <p>@item.freelancer.title</p>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="row">
+                                                                                                <input style="display: none;" type="text" name="freelancerId" value="@item.freelancer.freelancerId" />
+                                                                                                <input style="display: none;" type="text" name="jobId" value="@item.jobId" />
+                                                                                                <input style="display: none;" type="text" name="proposalId" value="@item.proposalId" />
+                                                                                                <button type="submit">Accept</button>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </li>
+                            }
+                        }
+                        
+
                     </ul>
                     <!-- end of user messages -->
-                    </div>
-
-
                 </div>
+
+
+            </div>
             </div>
         </div>
 
@@ -195,71 +289,4 @@
 
         <!-- Custom Theme Scripts -->
         <script src="../gentelella-master/build/js/custom.min.js"></script>
-    </div>
 </body>
-
-@*<h2>Index</h2>
-
-    <p>
-        <a asp-action="Create">Create New</a>
-    </p>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.photo)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.legalId)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.status)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.language)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.phoneNumber)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.englishProficiency)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-    @foreach (var item in Model) {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.photo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.legalId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.status)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.language)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.phoneNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.englishProficiency)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.customerId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.customerId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.customerId">Delete</a>
-                </td>
-            </tr>
-    }
-        </tbody>
-    </table>*@
-
-
-
-
-
-

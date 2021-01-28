@@ -1,0 +1,52 @@
+﻿@model FreelanceTech.ViewModel.UserViewModel;
+@{ 
+    Layout = "DashboardLayout";
+}
+<h2>OnGoing Projects</h2>
+<div id="myTabContent" class="tab-content">
+    <div role="tabpanel" class="tab-pane fade active show" id="tab_content3" aria-labelledby="profile-tab">
+        <!-- start user projects -->
+        <table class="data table table-striped no-margin">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Project Name</th>
+                    <th>Customer Name</th>
+                    <th class="hidden-phone">Job Title</th>
+                    <th>Payment</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    int i = 0;
+                    foreach (var item in Model.jobs)
+                    {
+                        <tr>
+                            <td>@i</td>
+                            <td>@item.title</td>
+                            <td>@item.customerViewMolel.firstName @item.customerViewMolel.lastName</td>
+                            <td class="hidden-phone">@item.title</td>
+                            <td class=""> @item.Payment_Amount
+                            </td>
+                        </tr>
+                        i++;
+                    }
+                }
+                <tr>
+                    <td>1</td>
+                    <td>New Company Takeover Review</td>
+                    <td>Deveint Inc</td>
+                    <td class="hidden-phone">18</td>
+                    <td class="vertical-align-mid">
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-success" data-transitiongoal="35"></div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- end user projects -->
+
+
+    </div>
+</div>

@@ -9,6 +9,7 @@ using FreelanceTech.Data;
 using FreelanceTech.Models;
 using FreelanceTech.Areas.Identity.Pages.Account;
 using FreelanceTech.ViewModel;
+using Shared.Web.MvcExtensions;
 
 namespace FreelanceTech.Controllers
 {
@@ -43,9 +44,34 @@ namespace FreelanceTech.Controllers
 
             Wallet wallet = walletRepository.Balance(RegisterModel.registeredUser);
             model.wallet = wallet;
-            return View();
+            UserViewModel userViewModel = new UserViewModel() { customerViewModel = model };
+            return View(userViewModel);
         }
+        [HttpGet]
+        public async Task<IActionResult> FreelancerWalletAsync()
+        {
+            UserViewModel userViewModel = new UserViewModel();
+            string userId = RegisterModel.registeredUser;
+            var freelancer = await _context.Freelancer
+                  .FirstOrDefaultAsync(m => m.freelancerId == userId);
+            var address = await _context.Address
+                 .FirstOrDefaultAsync(m => m.userId == userId);
+            var expertise = await _context.Expertise
+                 .FirstOrDefaultAsync(m => m.freelancerId == userId);
+            var user = await _context.Users
+                .FirstOrDefaultAsync(m => m.Id == userId);
+            var wallet = _context.Wallet.FirstOrDefault(m => m.userId == userId);
+            FreelancerViewModel model = new FreelancerViewModel();
 
+            model.freelancerId = freelancer.freelancerId;
+            model.lastName = user.lastName;
+            model.firstName = user.firstName;
+            model.photo = freelancer.photo;
+            model.wallet = wallet;
+            userViewModel.FreelancerViewModel = model;
+            return View(userViewModel);
+
+        }
         // GET: Wallets/Details/5
         public async Task<IActionResult> Details(string id)
         {

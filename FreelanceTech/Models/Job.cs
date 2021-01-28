@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FreelanceTech.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -16,6 +17,7 @@ namespace FreelanceTech.Models
         public string title { get; set; }
         public string questions { get; set; }
         public string category { get; set; }
+        public string skills { get; set; }
         public DateTime startDate { get; set; }
         public DateTime endDate { get; set; }
         public double startPrice { get; set; }
@@ -24,6 +26,7 @@ namespace FreelanceTech.Models
         public double Payment_Amount { get; set; }
         public string customerId { get; set; }
         public Customer Customer { get; set; }
+        public CustomerViewModel customerViewMolel { get; set; }
         public string freelancerId { get; set; }
         public Freelancer Freelancer { get; set; }
         public int contractId { get; set; }

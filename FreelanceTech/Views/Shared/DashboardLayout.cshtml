@@ -1,4 +1,4 @@
-﻿@model FreelanceTech.ViewModel.FreelancerViewModel
+﻿@model FreelanceTech.ViewModel.UserViewModel;
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +10,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <link href="~/css/StyleSheet.css" rel="stylesheet" />
 
     <!-- Bootstrap -->
     <link href="../gentelella-master/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -135,11 +135,11 @@
                     <!-- menu profile quick info -->
                     <div class="profile clearfix">
                         <div class="profile_pic">
-                            <img src="../images/@Html.DisplayFor(model => model.photo)" alt="..." class="img-circle profile_img">
+                            <img src="../images/@Html.DisplayFor(model => model.FreelancerViewModel.photo)" alt="..." class="img-circle profile_img">
                         </div>
                         <div class="profile_info">
                             <span>Welcome,</span>
-                            <h2>@Html.DisplayFor(model => model.firstName) @Html.DisplayFor(model => model.lastName)</h2>
+                            <h2>@Html.DisplayFor(model => model.FreelancerViewModel.firstName) @Html.DisplayFor(model => model.FreelancerViewModel.lastName)</h2>
                         </div>
                     </div>
                     <!-- /menu profile quick info -->
@@ -157,7 +157,7 @@
 
                                 </li>
                                 <li>
-                                    <a href="../Wallets/Index"><i class="fa fa-edit"></i> Wallets </a>
+                                    <a href="../Wallets/FreelancerWallet"><i class="fa fa-edit"></i> Wallets </a>
 
                                 </li>
                                 <li>
@@ -258,7 +258,7 @@
                         <ul class=" navbar-right">
                             <li class="nav-item dropdown open" style="padding-left: 15px;">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                                    <img src="../gentelella-master/production/images/img.jpg" alt=""> @Html.DisplayFor(model => model.firstName) @Html.DisplayFor(model => model.lastName)
+                                    <img src="../images/@Model.FreelancerViewModel.photo" alt=""> @Html.DisplayFor(model => model.FreelancerViewModel.firstName) @Html.DisplayFor(model => model.FreelancerViewModel.lastName)
                                 </a>
                                 <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="javascript:;"> Profile</a>
@@ -291,7 +291,7 @@
                                     </li>
                                     <li class="nav-item">
                                         <a class="dropdown-item">
-                                            <span class="image"><img src="../images/@Html.DisplayFor(model => model.photo)" alt="Profile Image" /></span>
+                                            <span class="image"><img src="../images/@Html.DisplayFor(model => model.FreelancerViewModel.photo)" alt="Profile Image" /></span>
                                             <span>
                                                 <span>John Smith</span>
                                                 <span class="time">3 mins ago</span>

@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace FreelanceTech.Areas.Identity.Pages.Account
 {
@@ -22,14 +23,14 @@ namespace FreelanceTech.Areas.Identity.Pages.Account
         private readonly SignInManager<User> _signInManager;
         private readonly UserManager<User> _userManager;
         private readonly ILogger<RegisterModel> _logger;
-        private readonly EmailSender _emailSender;
+        private readonly IEmailSender _emailSender;
         public static string registeredUser;
 
         public RegisterModel(
             UserManager<User> userManager,
             SignInManager<User> signInManager,
             ILogger<RegisterModel> logger,
-            EmailSender emailSender)
+            IEmailSender emailSender)
         {
             _userManager = userManager;
             _signInManager = signInManager;

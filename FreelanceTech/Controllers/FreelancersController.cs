@@ -22,7 +22,7 @@ namespace FreelanceTech.Controllers
 {
     public class FreelancersController : Controller
     {
-        
+
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _hostingEnvironment;
         private string currentUser;
@@ -42,9 +42,28 @@ namespace FreelanceTech.Controllers
 
         }
         [HttpGet]
-        public IActionResult SubmitProposal()
+        public async Task<IActionResult> SubmitProposal()
         {
-            return View();
+            string jobId = Request.Query["jobId"].ToString();
+            UserViewModel userViewModel = new UserViewModel();
+            string userId = User.GetUserId();
+            var freelancer = await _context.Freelancer
+                  .FirstOrDefaultAsync(m => m.freelancerId == userId);
+            var user = await _context.Users
+                .FirstOrDefaultAsync(m => m.Id == userId);
+
+            FreelancerViewModel model = new FreelancerViewModel();
+
+            model.freelancerId = freelancer.freelancerId;
+            model.phoneNumber = freelancer.phoneNumber;
+            model.lastName = user.lastName;
+            model.firstName = user.firstName;
+
+            model.photo = freelancer.photo;
+            userViewModel.job = new Job();
+            userViewModel.job.jobId = jobId;
+            userViewModel.FreelancerViewModel = model;
+            return View(userViewModel);
         }
         [HttpPost]
         public IActionResult SubmitProposal(Proposal proposal)
@@ -54,24 +73,24 @@ namespace FreelanceTech.Controllers
                 Random rnd = new Random();
                 string id = rnd.Next().ToString();
                 proposal.proposalId = id;
-                proposal.freelancerId = "1";
-                proposal.jobId = "1";
+                proposal.freelancerId = RegisterModel.registeredUser;
+                proposal.jobId = Request.Form["jobId"].ToString();
                 proposalRepository.SubmitProposal(proposal);
-                return View();
+                return RedirectToAction("Index", "Freelancers");
             }
             return View();
         }
 
         public IActionResult Register()
         {
-          
+
             return View();
         }
         // GET: Freelancers
 
         public async Task<IActionResult> Index()
         {
-
+            UserViewModel userViewModel = new UserViewModel();
             string userId = User.GetUserId();
             var freelancer = await _context.Freelancer
                   .FirstOrDefaultAsync(m => m.freelancerId == userId);
@@ -81,10 +100,20 @@ namespace FreelanceTech.Controllers
                  .FirstOrDefaultAsync(m => m.freelancerId == userId);
             var user = await _context.Users
                 .FirstOrDefaultAsync(m => m.Id == userId);
-            var job = await _context.Job
-                             .FirstOrDefaultAsync(m => m.freelancerId == userId);
+            var job = _context.Job;
             FreelancerViewModel model = new FreelancerViewModel();
-
+            var proposal = _context.Proposal.Where(m => m.freelancerId == userId);
+            List<ProposalViewModel> proposals = new List<ProposalViewModel>();
+            ProposalViewModel prop = new ProposalViewModel();
+            foreach (var item in proposal)
+            {
+                prop.jobId = item.jobId;
+                prop.description = item.description;
+                prop.answers = item.answers;
+                prop.bidAmount = item.bidAmount;
+                prop.jobTitle = _context.Job.FirstOrDefault(m => m.jobId == item.jobId).title;
+                proposals.Add(prop);
+            }
             model.freelancerId = freelancer.freelancerId;
             model.phoneNumber = freelancer.phoneNumber;
             model.title = freelancer.title;
@@ -100,7 +129,37 @@ namespace FreelanceTech.Controllers
 
             model.photo = freelancer.photo;
             model.houseNumber = address.houseNumber;
-            return View(model);
+            userViewModel.FreelancerViewModel = model;
+            userViewModel.jobs = job.ToList();
+            userViewModel.proposals = proposals;
+            return View(userViewModel);
+        }
+        [HttpPost]
+        public async Task<IActionResult> ViewJob()
+        {
+            string jobId = Request.Form["jobId"].ToString();
+            UserViewModel userViewModel = new UserViewModel();
+            string userId = User.GetUserId();
+            var freelancer = await _context.Freelancer
+                  .FirstOrDefaultAsync(m => m.freelancerId == userId);
+            var user = await _context.Users
+                .FirstOrDefaultAsync(m => m.Id == userId);
+            var job = _context.Job.FirstOrDefault(m => m.jobId == jobId);
+            var customerUser = _context.Users.FirstOrDefault(m => m.Id == job.customerId);
+            FreelancerViewModel model = new FreelancerViewModel();
+            //var customer = _context.Customer.FirstOrDefault(m => m.customerId == job.customerId);
+            model.freelancerId = freelancer.freelancerId;
+            model.lastName = user.lastName;
+            model.firstName = user.firstName;
+
+            model.photo = freelancer.photo;
+            userViewModel.FreelancerViewModel = model;
+            userViewModel.customerViewModel = new CustomerViewModel();
+            userViewModel.customerViewModel.firstName = customerUser.firstName;
+            userViewModel.customerViewModel.lastName = customerUser.lastName;
+            userViewModel.customerViewModel.phoneNumber = customerUser.PhoneNumber;
+            userViewModel.job = job;
+            return View(userViewModel);
         }
 
         // GET: Freelancers/Details/5
@@ -121,14 +180,14 @@ namespace FreelanceTech.Controllers
             return View(freelancer);
         }
 
-      
+
 
         // POST: Freelancers/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-   
+
         public async Task<IActionResult> Register(CreateFreelancerViewModel viewmodel)
         {
             if (ModelState.IsValid)
@@ -188,14 +247,21 @@ namespace FreelanceTech.Controllers
 
                 _context.Add(lang);
                 await _context.SaveChangesAsync();
-             
 
 
-                return RedirectToAction(nameof(Index));
+
+                return RedirectToAction("Index", "Home");
             }
             return View(viewmodel);
         }
 
+        [HttpGet]
+        public IActionResult OngoingProjects()
+        {
+            string freelancerId = RegisterModel.registeredUser;
+            var jobs = _context.Job.Where(m => m.freelancerId == freelancerId);
+            return View();
+        }
         private string ProcessUploadedFile(CreateFreelancerViewModel model)
         {
             string uniqueFileName = null;

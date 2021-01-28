@@ -15,6 +15,8 @@ namespace FreelanceTech.Models
         public int englishProficiency { get; set; }
         public double hourlyRate { get; set; }
         public string title { get; set; }
+        public string category { get; set; }
+        public string skills { get; set; }
         public string professionalOverview { get; set; }
         public string photo { get; set; }
         public Address Address { get; set; }

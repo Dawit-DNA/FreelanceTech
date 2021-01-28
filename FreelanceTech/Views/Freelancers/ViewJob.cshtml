@@ -1,0 +1,95 @@
+﻿@model FreelanceTech.ViewModel.UserViewModel;
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "DashboardLayout";
+}
+<div class="right_col">
+    <div class="container emp-profile">
+        <form asp-action="SubmitProposal" asp-controller="Freelancers" method="get">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="profile-head">
+                        <h5>
+                            @Model.job.title
+                        </h5>
+                        <h6>
+                            Description:
+                        </h6>
+                        <p>
+                            @Model.job.description
+                        </p>
+                        <h6> Questions</h6>
+                        <p>
+                            @Model.job.questions
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="profile-work">
+                        <p>Category</p>
+                        <a href="">@Model.job.category</a><br />
+                        <p>SKILLS</p>
+                        <a href="">Web Designer</a><br />
+                        <a href="">Web Developer</a><br />
+                        <a href="">WordPress</a><br />
+                        <a href="">WooCommerce</a><br />
+                        <a href="">PHP, .Net</a><br />
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="tab-content profile-tab" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Customer Name</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>@Model.customerViewModel.firstName @Model.customerViewModel.lastName</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Customer Phone</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>@Model.customerViewModel.phoneNumber</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Experience Level</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>@Model.job.level</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Project Duration Date</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>@Model.job.startDate. - @Model.job.endDate.Date</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Price Range</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>$@Model.job.startPrice - $@Model.job.endPrice</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <br />
+                        <input style="display: none;" type="text" name="jobId" value="@Model.job.jobId" />
+                        <button type="submit" class="btn btn-primary">Apply</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

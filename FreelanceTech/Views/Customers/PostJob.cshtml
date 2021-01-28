@@ -1,6 +1,6 @@
 ﻿@{
     Layout = "_CustomerDashboardLayout";
-    @model Job;
+    @model FreelanceTech.ViewModel.UserViewModel;
 }
 
 <div class="nav-md">
@@ -61,7 +61,7 @@
                                                         Title <span class="required">*</span>
                                                     </label>
                                                     <div class="col-md-6 col-sm-6 ">
-                                                        <input asp-for="title" required="required" class="form-control  ">
+                                                        <input asp-for="job.title" required="required" class="form-control  ">
                                                     </div>
                                                 </div>
                                                 <div class="x_panel" width="50px" height="50px">
@@ -150,7 +150,7 @@
                                                                 <a class="btn" data-edit="redo" title="Redo (Ctrl/Cmd+Y)"><i class="fa fa-repeat"></i></a>
                                                             </div>
                                                         </div>
-                                                        <textarea asp-for="description" class="form-control" rows="10"></textarea>
+                                                        <textarea asp-for="job.description" class="form-control" rows="10"></textarea>
 
 
 
@@ -167,7 +167,7 @@
                                                 <h2 class="StepTitle">Step 2 Content</h2>
                                                 <label class="control-label col-md-3 col-sm-3 ">Category</label>
                                                 <div class="col-md-9 col-sm-9 ">
-                                                    <select asp-for="category" onchange="fun()" class="form-control category" id="category">
+                                                    <select asp-for="job.category" onchange="fun()" class="form-control category" id="category">
                                                         <option value="none" onchange="fun()" selected="selected">Choose option</option>
                                                         <option value="Web Development" onchange="fun()">Web Development</option>
                                                         <option value="Mobile Development" onchange="fun()">Mobile Development</option>
@@ -178,15 +178,15 @@
                                                 <div>
                                                     <label class="control-label col-md-3 col-sm-3 ">Skills</label>
                                                     <div class="col-md-9 col-sm-9 ">
-                                                        <select class="select2_multiple form-control skills" id="skills"asp-for="JobSkill" multiple="multiple">
+                                                        <select class="select2_multiple form-control skills" id="skills"asp-for="job.JobSkill" multiple="multiple">
                                                         </select>
                                                         <div id="suggestions-container" style="position: relative; float: left; width: 250px; margin: 10px;"></div>
                                                     </div>
                                                 </div>
                                                 <div>
-                                                    <label class="control-label col-md-3 col-sm-3 "asp-for="questions">Questions: </label>
+                                                    <label class="control-label col-md-3 col-sm-3 "asp-for="job.questions">Questions: </label>
                                                     <div class="col-md-9 col-sm-9">
-                                                        <textarea class="form-control" rows="8" asp-for="questions"></textarea>
+                                                        <textarea class="form-control" rows="8" asp-for="job.questions"></textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -194,7 +194,7 @@
                                                 <h2 class="StepTitle">Step 3 Content</h2>
                                                 <label class="control-label col-md-3 col-sm-3 ">Level of Experience</label>
                                                 <div class="col-md-9 col-sm-9 ">
-                                                    <select asp-for="level" class="form-control">
+                                                    <select asp-for="job.level" class="form-control">
                                                         <option>Choose option</option>
                                                         <option>Option one</option>
                                                         <option>Option two</option>
@@ -210,7 +210,7 @@
                                                     Duration: From <span class="required">*</span>
                                                 </label>
                                                 <div class="col-md-9 col-sm-9 ">
-                                                    <input asp-for="startDate" class="date-picker form-control" placeholder="dd-mm-yyyy" type="text" required="required" onfocus="this.type='date'" onmouseover="this.type='date'" onclick="this.type='date'" onblur="this.type='text'" onmouseout="timeFunctionLong(this)" data-val="true" data-val-required="The startDate field is required." id="startDate" name="startDate" value="">
+                                                    <input asp-for="job.startDate" class="date-picker form-control" placeholder="dd-mm-yyyy" type="text" required="required" onfocus="this.type='date'" onmouseover="this.type='date'" onclick="this.type='date'" onblur="this.type='text'" onmouseout="timeFunctionLong(this)" data-val="true" data-val-required="The startDate field is required." id="startDate" name="startDate" value="">
                                                     <script>
                                                         function timeFunctionLong(input) {
                                                             setTimeout(function () {
@@ -224,7 +224,7 @@
                                                     To <span class="required">*</span>
                                                 </label>
                                                 <div class="col-md-9 col-sm-2 ">
-                                                    <input asp-for="endDate" class="date-picker form-control" placeholder="dd-mm-yyyy" type="date" required="required" onfocus="this.type='date'" onmouseover="this.type='date'" onclick="this.type='date'" onblur="this.type='text'" onmouseout="timeFunctionLong(this)" data-val="true" data-val-required="The endDate field is required." id="endDate" name="endDate" value="">
+                                                    <input asp-for="job.endDate" class="date-picker form-control" placeholder="dd-mm-yyyy" type="date" required="required" onfocus="this.type='date'" onmouseover="this.type='date'" onclick="this.type='date'" onblur="this.type='text'" onmouseout="timeFunctionLong(this)" data-val="true" data-val-required="The endDate field is required." id="endDate" name="endDate" value="">
                                                     <script>
                                                         function timeFunctionLong(input) {
                                                             setTimeout(function () {
@@ -240,12 +240,12 @@
                                                     <br />
                                                     <br />
                                                     <div class="col-md-2 col-sm-6  form-group has-feedback">
-                                                        <input asp-for="startPrice" type="text" class="form-control has-feedback-left" id="inputSuccess2" placeholder="">
+                                                        <input asp-for="job.startPrice" type="text" class="form-control has-feedback-left" id="inputSuccess2" placeholder="">
                                                         <span class="fa fa-money form-control-feedback left" aria-hidden="true"></span>
                                                     </div>
 
                                                     <div class="col-md-2 col-sm-6  form-group has-feedback">
-                                                        <input asp-for="endPrice" type="text" class="form-control has-feedback-left" id="inputSuccess2" placeholder="">
+                                                        <input asp-for="job.endPrice" type="text" class="form-control has-feedback-left" id="inputSuccess2" placeholder="">
                                                         <span class="fa fa-money form-control-feedback left" aria-hidden="true"></span>
                                                     </div>
 

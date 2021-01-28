@@ -1,27 +1,27 @@
 ﻿@model FreelanceTech.ViewModel.UserViewModel;
 
-    @{
-        ViewData["Title"] = "Wallet";
-        Layout = "_CustomerDashboardLayout";
-    }
+@{
+    ViewData["Title"] = "Wallet";
+    Layout = "DashboardLayout";
+}
 
 
 
 <div class="">
     <div class="x_panel text-md-center">
         <h2>Account Balance</h2>
-        <h1>$@Html.DisplayFor(model => model.customerViewModel.wallet.balance)</h1>
-        <a href="#myModal" class="trigger-btn btn btn-round btn-success" data-toggle="modal">Deposit</a>
+        <h1>$@Html.DisplayFor(model => model.FreelancerViewModel.wallet.balance)</h1>
+        <a href="#myModal" class="trigger-btn btn btn-round btn-success" data-toggle="modal">Withdrawl</a>
     </div>
 
     <!-- Modal HTML -->
-    <div id="myModal" class="modal fade">
+    <!--<div id="myModal" class="modal fade">
         <div class="modal-dialog modal-confirm">
             <div class="modal-content">
                 <form asp-controller="Customers" asp-action="CheckoutExpress">
                     <div class="modal-body">
-                        <label class="text-center">Enter Amount</label>
-                        <input type="text" class="form-control" name="balance" />
+                        <label class="text-center" asp-for="customerViewModel.wallet.balance">Enter Amount</label>
+                        <input type="text" class="form-control" asp-for="customerViewModel.wallet.balance" />
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-success" type="submit">Done</button>
@@ -29,7 +29,7 @@
                 </form>
             </div>
         </div>
-    </div>
+    </div>-->
 </div>
 
 
