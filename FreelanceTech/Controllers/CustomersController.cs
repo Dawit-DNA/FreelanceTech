@@ -66,7 +66,6 @@ namespace FreelanceTech.Controllers
                 var prop = _context.Proposal.Where(m => m.jobId == item.jobId);
                 if (prop != null)
                 {
-
                     foreach (var i in prop)
                     {
                         var userr = _context.Users.FirstOrDefault(m => m.Id == i.freelancerId);
@@ -85,7 +84,6 @@ namespace FreelanceTech.Controllers
                         proposal.answers = i.answers;
                         proposals.Add(proposal);
                     }
-
                 }
             }
             CustomerViewModel model = new CustomerViewModel();
@@ -113,7 +111,32 @@ namespace FreelanceTech.Controllers
             _context.Job.Update(job);
             return RedirectToAction("Index", "Customer");
         }
+        [HttpGet]
+        public async Task<IActionResult> BusinessAnalyst()
+        {
+            //UserViewModel userViewModel = new UserViewModel();
+            //string userId = User.GetUserId();
+            //var customer = await _context.Customer
+            //      .FirstOrDefaultAsync(m => m.customerId == userId);
+            //var user = await _context.Users
+            //                 .FirstOrDefaultAsync(m => m.Id == userId);
+            //CustomerViewModel model = new CustomerViewModel();
+            //model.customerId = customer.customerId;
+            //model.phoneNumber = customer.phoneNumber;
+            //model.lastName = user.lastName;
+            //model.firstName = user.firstName;
 
+            //model.photo = customer.photo;
+
+            //userViewModel.customerViewModel = model;
+            //return View(userViewModel);
+            return View();
+        }
+        //[HttpPost]
+        //public IActionResult BusinessAnalyst(BusinessAnalyst businessAnalyst)
+        //{
+        //    return View();
+        //}
         // GET: Customers/Create
         public IActionResult Create()
         {
@@ -159,7 +182,7 @@ namespace FreelanceTech.Controllers
                 address.pobox = Convert.ToInt32(viewmodel.pobox.ToString());
                 address.userId = currentUser;
                 Wallet wall = new Wallet();
-                wall.userId = userId;
+                wall.userId = RegisterModel.registeredUser;
                 wall.balance = 0;
                 walletRepository.Deposit(wall);
 
@@ -177,7 +200,26 @@ namespace FreelanceTech.Controllers
             }
             return View(viewmodel);
         }
-
+        [HttpGet]
+        public IActionResult ViewProfile()
+        {
+            return View();
+        }
+        //[HttpGet]
+        //public IActionResult ViewProfile()
+        //{
+        //    string freelancerId = RegisterModel.registeredUser;
+        //    var user = _context.Users.FirstOrDefault(m => m.Id == freelancerId);
+        //    var freelancer = _context.Freelancer.FirstOrDefault(m => m.freelancerId == freelancerId);
+        //    CustomerViewModel userViewModel = new CustomerViewModel();
+        //    userViewModel.firstName = user.firstName;
+        //    userViewModel.lastName = user.lastName;
+        //    userViewModel.email = user.Email;
+        //    userViewModel.phoneNumber = freelancer.phoneNumber;
+        //    userViewModel.title = freelancer.title;
+        //    userViewModel.category = freelancer.category;
+        //    userViewModel.skills = freelancer.skills;
+        //}
         private string ProcessUploadedFile(CreateCustomerViewModel model)
         {
             string uniqueFileName = null;

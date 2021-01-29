@@ -120,9 +120,12 @@
                                                                 <i class="fa fa-user">
                                                                 </i> <i class="fa fa-comment"></i>
                                                             </button>
-                                                            <button type="button" class="btn btn-primary btn-sm">
-                                                                <i class="fa fa-user"> </i> View Profile
-                                                            </button>
+                                                            <form asp-action="ViewProfile" asp-controller="Customers" method="get">
+                                                                <button type="submit" class="btn btn-primary btn-sm">
+                                                                    <i class="fa fa-user"> </i> View Profile
+                                                                </button>
+                                                            </form>
+
                                                         </div>
                                                     </div>
                                                 </div>

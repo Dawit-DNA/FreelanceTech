@@ -1,0 +1,22 @@
+﻿@model FreelanceTech.ViewModel.UserViewModel;
+
+@{
+    ViewData["Title"] = "BusinessAnalyst";
+    Layout = "_CustomerDashboardLayout";
+}
+
+<div id="myModal" class="modal fade">
+    <div class="modal-dialog modal-confirm">
+        <div class="modal-content">
+            <form asp-controller="Customers" asp-action="CheckoutExpress">
+                <div class="modal-body">
+                    <label class="text-center">Enter Amount</label>
+                    <input type="text" class="form-control" name="balance" />
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success" type="submit">Done</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

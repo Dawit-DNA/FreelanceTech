@@ -232,7 +232,10 @@ namespace FreelanceTech.Controllers
                 experience.location = viewmodel.location;
                 experience.startDate = viewmodel.startDate;
                 experience.endDate = viewmodel.endDate;
-
+                Wallet wall = new Wallet();
+                wall.userId = RegisterModel.registeredUser;
+                wall.balance = 0;
+                walletRepository.Deposit(wall);
                 _context.Add(freelancer);
                 await _context.SaveChangesAsync();
                 _context.Add(address);
@@ -256,11 +259,60 @@ namespace FreelanceTech.Controllers
         }
 
         [HttpGet]
-        public IActionResult OngoingProjects()
+        public IActionResult OnGoingProjects()
         {
+            UserViewModel userViewModel = new UserViewModel();
+            userViewModel.jobs = new List<Job>();
+            userViewModel.FreelancerViewModel = new FreelancerViewModel();
             string freelancerId = RegisterModel.registeredUser;
+            var freelancer = _context.Freelancer.FirstOrDefault(m => m.freelancerId == freelancerId);
+            var freelancer1 = _context.Users.FirstOrDefault(m => m.Id == freelancerId);
+            userViewModel.FreelancerViewModel.freelancerId = freelancer.freelancerId;
+            userViewModel.FreelancerViewModel.firstName = freelancer1.firstName;
+            userViewModel.FreelancerViewModel.lastName = freelancer1.lastName;
+            userViewModel.FreelancerViewModel.photo = freelancer.photo;
             var jobs = _context.Job.Where(m => m.freelancerId == freelancerId);
-            return View();
+            List<CustomerViewModel> customers = new List<CustomerViewModel>();
+            Job jobs1 = new Job();
+
+            foreach (var item in jobs)
+            {
+                jobs1.jobId = item.jobId;
+                jobs1.title = item.title;
+                jobs1.Payment_Amount = item.Payment_Amount;
+                var user = _context.Users.FirstOrDefault(m => m.Id == item.customerId);
+                jobs1.customerViewModel = new CustomerViewModel() { customerId = item.customerId, firstName = user.firstName, lastName = user.lastName };
+                userViewModel.jobs.Add(jobs1);
+            }
+            return View(userViewModel);
+        }
+        [HttpGet]
+        public IActionResult ProjectsWorkedOn()
+        {
+            UserViewModel userViewModel = new UserViewModel();
+            userViewModel.jobs = new List<Job>();
+            userViewModel.FreelancerViewModel = new FreelancerViewModel();
+            string freelancerId = RegisterModel.registeredUser;
+            var freelancer = _context.Freelancer.FirstOrDefault(m => m.freelancerId == freelancerId);
+            var freelancer1 = _context.Users.FirstOrDefault(m => m.Id == freelancerId);
+            userViewModel.FreelancerViewModel.freelancerId = freelancer.freelancerId;
+            userViewModel.FreelancerViewModel.firstName = freelancer1.firstName;
+            userViewModel.FreelancerViewModel.lastName = freelancer1.lastName;
+            userViewModel.FreelancerViewModel.photo = freelancer.photo;
+            var jobs = _context.Job.Where(m => m.freelancerId == freelancerId & m.status == "Ended");
+            List<CustomerViewModel> customers = new List<CustomerViewModel>();
+            Job jobs1 = new Job();
+
+            foreach (var item in jobs)
+            {
+                jobs1.jobId = item.jobId;
+                jobs1.title = item.title;
+                jobs1.Payment_Amount = item.Payment_Amount;
+                var user = _context.Users.FirstOrDefault(m => m.Id == item.customerId);
+                jobs1.customerViewModel = new CustomerViewModel() { customerId = item.customerId, firstName = user.firstName, lastName = user.lastName };
+                userViewModel.jobs.Add(jobs1);
+            }
+            return View(userViewModel);
         }
         private string ProcessUploadedFile(CreateFreelancerViewModel model)
         {

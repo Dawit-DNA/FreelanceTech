@@ -26,7 +26,8 @@ namespace FreelanceTech.Models
         public double Payment_Amount { get; set; }
         public string customerId { get; set; }
         public Customer Customer { get; set; }
-        public CustomerViewModel customerViewMolel { get; set; }
+        [NotMapped]
+        public CustomerViewModel customerViewModel { get; set; }
         public string freelancerId { get; set; }
         public Freelancer Freelancer { get; set; }
         public int contractId { get; set; }
