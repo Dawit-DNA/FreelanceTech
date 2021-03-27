@@ -1,2 +1,2 @@
-# FreelanceTech
-A senior project concerning Freelancing Application in Ethiopia
+# Freelancing Platform for Ethiopia
+This online freelancing web project is intended to address the existing issue of unemployment and aims to bridge the gap between job seekers and clients. The already manifested platforms that give this service are not sufficient enough to create a trusting and professional environment. In which a designated user can fully employ his needs. The system focus primarily on IT related occupations thus creating a controlled exchange of information.
